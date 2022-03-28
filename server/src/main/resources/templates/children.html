@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<table>
+    <thead>
+    <tr>
+        <th scope="col">ФИО</th>
+        <th scope="col">Возраст</th>
+        <th scope="col">Адрес</th>
+        <th scope="col">Адрес</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="child : ${children}">
+        <td th:text="${child.surname + ' ' + child.name + ' ' + child.patronymic}"/>
+        <td th:text="${child.age}"/>
+        <td th:text="${child.address}"/>
+        <td><a th:text = "Удалить" th:href="${'delete/' + child.id}"/></td>
+
+    </tr>
+    </tbody>
+</table>
+
+
+</body>
+</html>
