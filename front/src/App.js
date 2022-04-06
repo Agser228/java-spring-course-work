@@ -5,6 +5,7 @@ import HeaderComponent from './components/HeaderComponent';
 import ListChildrenComponent from './components/ListChildrenComponent';
 import ViewChildComponent from './components/ViewChildComponent';
 import CreateChildComponent from './components/CreateChildComponent';
+import CreateVoucherComponent from './components/CreateVoucherComponent';
 
 function App() {
   return (
@@ -15,8 +16,9 @@ function App() {
             <Switch>
                 <Route path = "/" exact component = {ListChildrenComponent}></Route>
                 <Route path = "/add/:id" component = {CreateChildComponent}></Route>
-                {/* <Route path = "/employees" component = {ListChildrenComponent}></Route> */}
                 <Route path = "/view/:id" component = {ViewChildComponent}></Route>
+                <Route path = "/voucher" component = {CreateVoucherComponent}></Route>
+
             </Switch>
           </div>
         <FooterComponent/>

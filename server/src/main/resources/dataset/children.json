@@ -1,0 +1,47 @@
+[
+  {
+    "name": "Colton",
+    "surname": "Adara",
+    "patronymic": "Cheyenne",
+    "dateBirth": "05/01/2013",
+    "birthCertificateNumber": 7910530,
+    "address": "Yekaterinburg",
+    "age": 12
+  },
+  {
+    "name": "Peter",
+    "surname": "Bert",
+    "patronymic": "Maia",
+    "dateBirth": "08/21/2011",
+    "birthCertificateNumber": 4119249,
+    "address": "Bremen",
+    "age": 15
+  },
+  {
+    "name": "Malik",
+    "surname": "Debra",
+    "patronymic": "Lysandra",
+    "dateBirth": "01/02/2012",
+    "birthCertificateNumber": 5587752,
+    "address": "Phalaborwa",
+    "age": 8
+  },
+  {
+    "name": "Nigel",
+    "surname": "Michelle",
+    "patronymic": "Candice",
+    "dateBirth": "03/20/2012",
+    "birthCertificateNumber": 1825198,
+    "address": "Sydney",
+    "age": 13
+  },
+  {
+    "name": "Igor",
+    "surname": "Aidan",
+    "patronymic": "Imogene",
+    "dateBirth": "06/26/2011",
+    "birthCertificateNumber": 4799028,
+    "address": "Colorado Springs",
+    "age": 11
+  }
+]

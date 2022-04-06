@@ -18,6 +18,10 @@ class HeaderComponent extends Component {
                             Лагерь
                         </a>
                     </div>
+                    <div className='nav-item'><a className="nav-link active text-light" href="/voucher">Заполнение путевок</a></div>
+                    <div className='nav-item'><a className="nav-link active text-light" href="/db-change">Изменение в базе</a></div>
+                    <div className='nav-item'><a className="nav-link active text-light" href="/workforce">Кадры</a></div>
+                    <div className='nav-item'><a className="nav-link active text-light" href="/squad">Отряды</a></div>
                 </nav>
             </div>
         );
