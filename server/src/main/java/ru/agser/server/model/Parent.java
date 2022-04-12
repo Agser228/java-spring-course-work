@@ -1,5 +1,7 @@
 package ru.agser.server.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,6 +16,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import java.util.Objects;
 
 @Entity
@@ -25,9 +30,24 @@ import java.util.Objects;
 @JsonSerialize
 public class Parent {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(
+            name = "parent_sequence",
+            sequenceName = "parent_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "parent_sequence"
+    )
     private Long id;
-    private Long childId;
+
+    @OneToOne
+    @JoinColumn(
+            name = "child_id",
+            referencedColumnName = "id"
+    )
+    @JsonBackReference
+    private Child child;
 
     private String name;
     private String surname;

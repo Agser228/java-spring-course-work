@@ -17,8 +17,7 @@ class ListChildrenComponent extends Component {
 
     componentDidMount() {
         ChildService.getAllChildren().then((res) => {
-            console.log(JSON.stringify(res.data.data.child));
-            this.setState({children: res.data.data.child});
+            this.setState({children: res});
         })
     }
 

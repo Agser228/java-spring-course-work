@@ -14,6 +14,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import java.util.Objects;
 
 @Entity
@@ -25,7 +26,15 @@ import java.util.Objects;
 @JsonSerialize
 public class Shift {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(
+            name = "shift_sequence",
+            sequenceName = "shift_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "shift_sequence"
+    )
     private Long id;
 
     private int number;

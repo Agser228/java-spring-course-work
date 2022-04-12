@@ -2,28 +2,27 @@ import axios from "axios";
 
 const CHILD_API_BASE_URL = "http://localhost:8080/api/v1/child/";
 
-class ChildService {
+export default class ChildService {
 
-    getAllChildren() {
-        return axios.get(CHILD_API_BASE_URL + "list");
+    static async getAllChildren() {
+        let res = await axios.get(CHILD_API_BASE_URL + "list");
+        return res.data.data.child
     }
 
-    createChild(child) {
+    static createChild(child) {
         return axios.post(CHILD_API_BASE_URL + "create", child);
     } 
 
-    getChildById(id) {
+    static getChildById(id) {
         return axios.get(CHILD_API_BASE_URL + "get/" + id);
     }
 
-    updateChild(id, child) {
-        return axios.put(CHILD_API_BASE_URL +id, child);
+    static updateChild(id, child) {
+        return axios.put(CHILD_API_BASE_URL + id, child);
     }
 
-    deleteChild(id) {
+    static deleteChild(id) {
         return axios.delete(CHILD_API_BASE_URL + id);
     }
 
 }
-
-export default new ChildService();

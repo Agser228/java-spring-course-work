@@ -1,28 +1,28 @@
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Routes, Route } from 'react-router-dom';
 import './App.css';
-import FooterComponent from './components/FooterComponent';
+import CreateChildComponent from './components/CreateChildComponent';
 import HeaderComponent from './components/HeaderComponent';
 import ListChildrenComponent from './components/ListChildrenComponent';
+import Footer from './components/UI/footer/Footer';
 import ViewChildComponent from './components/ViewChildComponent';
-import CreateChildComponent from './components/CreateChildComponent';
-import CreateVoucherComponent from './components/CreateVoucherComponent';
+import Squads from './pages/Squads';
+import Voucher from './pages/Voucher';
+import Children from './pages/Children';
+import { BrowserRouter } from "react-router-dom"
+import AppRouter from './components/AppRouter';
+import Navbar from "./components/UI/navbar/Navbar";
+
 
 function App() {
   return (
     <div>
-      <Router>
-        <HeaderComponent/>
           <div className="container">
-            <Switch>
-                <Route path = "/" exact component = {ListChildrenComponent}></Route>
-                <Route path = "/add/:id" component = {CreateChildComponent}></Route>
-                <Route path = "/view/:id" component = {ViewChildComponent}></Route>
-                <Route path = "/voucher" component = {CreateVoucherComponent}></Route>
-
-            </Switch>
+              <BrowserRouter>
+              <Navbar/>
+              <AppRouter/>
+            </BrowserRouter>
           </div>
-        <FooterComponent/>
-      </Router>
+        <Footer/>
     </div>
   );
 }

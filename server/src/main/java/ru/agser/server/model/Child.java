@@ -1,6 +1,8 @@
 package ru.agser.server.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,10 +15,16 @@ import org.hibernate.Hibernate;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.datetime.DateFormatter;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -30,10 +38,32 @@ import java.util.Objects;
 @JsonSerialize
 public class Child {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(
+            name = "child_sequence",
+            sequenceName = "child_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "child_sequence"
+    )
     private Long id;
-    private Long parentId;
-    private Long squadId;
+
+    @OneToOne
+    @JoinColumn(
+            name = "parent_id",
+            referencedColumnName = "id"
+    )
+    @JsonManagedReference
+    private Parent parent;
+
+    @ManyToOne
+    @JoinColumn(
+            name = "squad_id",
+            referencedColumnName = "id"
+    )
+    @JsonBackReference
+    private Squad squad;
 
     private String name;
     private String surname;
