@@ -4,6 +4,7 @@ import ru.agser.server.repo.AbstractRepository;
 import ru.agser.server.service.AbstractService;
 
 import java.util.Collection;
+import java.util.List;
 
 public abstract class AbstractServiceImpl<T, R extends AbstractRepository<T>> implements AbstractService<T> {
     R repository;
@@ -17,9 +18,20 @@ public abstract class AbstractServiceImpl<T, R extends AbstractRepository<T>> im
         return repository.save(entity);
     }
 
+
+    @Override
+    public List<T> saveAll(List<T> entities) {
+        return repository.saveAll(entities);
+    }
+
     @Override
     public Collection<T> list(int limit) {
         return repository.findAll(PageRequest.of(0, limit)).toList();
+    }
+
+    @Override
+    public Collection<T> getAll() {
+        return repository.findAll();
     }
 
     @Override

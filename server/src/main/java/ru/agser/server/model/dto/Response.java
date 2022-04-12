@@ -1,4 +1,4 @@
-package ru.agser.server.model;
+package ru.agser.server.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;

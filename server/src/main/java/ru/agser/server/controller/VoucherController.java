@@ -1,18 +1,14 @@
 package ru.agser.server.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.agser.server.model.Response;
+import ru.agser.server.model.dto.Response;
 import ru.agser.server.model.dto.Voucher;
-import ru.agser.server.service.ChildService;
-import ru.agser.server.service.ParentService;
 import ru.agser.server.service.VoucherService;
 
 import java.time.LocalDateTime;

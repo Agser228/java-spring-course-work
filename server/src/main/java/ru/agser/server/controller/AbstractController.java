@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import ru.agser.server.model.Response;
+import ru.agser.server.model.dto.Response;
 import ru.agser.server.service.AbstractService;
 
 import java.time.LocalDateTime;
@@ -17,7 +17,7 @@ import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:3000")
 public abstract class AbstractController<T, S extends AbstractService<T>>  {
-    private final S service;
+    protected final S service;
     private final String type;
 
 

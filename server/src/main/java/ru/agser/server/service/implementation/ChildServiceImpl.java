@@ -7,6 +7,10 @@ import ru.agser.server.repo.ChildRepository;
 import ru.agser.server.service.ChildService;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -16,5 +20,14 @@ public class ChildServiceImpl extends AbstractServiceImpl<Child, ChildRepository
     @Autowired
     public ChildServiceImpl(ChildRepository repository) {
         super(repository);
+    }
+
+    @Override
+    public List<Child> getAllChildrenSortedBy(Comparator<Child> comparator) {
+        return new ArrayList<>(
+                getAll()
+                .stream()
+                .sorted(comparator)
+                .collect(Collectors.toList()));
     }
 }
