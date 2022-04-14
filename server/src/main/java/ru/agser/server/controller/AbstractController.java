@@ -18,7 +18,7 @@ import java.util.Map;
 @CrossOrigin(origins = "http://localhost:3000")
 public abstract class AbstractController<T, S extends AbstractService<T>>  {
     protected final S service;
-    private final String type;
+    protected final String type;
 
 
     public AbstractController(S service) {

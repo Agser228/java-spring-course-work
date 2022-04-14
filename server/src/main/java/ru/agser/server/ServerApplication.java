@@ -7,11 +7,13 @@ import org.springframework.context.annotation.Bean;
 import ru.agser.server.controller.WorkerController;
 import ru.agser.server.enumeration.Position;
 import ru.agser.server.model.Child;
+import ru.agser.server.model.Shift;
 import ru.agser.server.model.Squad;
 import ru.agser.server.model.Worker;
 import ru.agser.server.repo.ChildRepository;
 import ru.agser.server.repo.SquadRepository;
 import ru.agser.server.repo.WorkerRepository;
+import ru.agser.server.service.ShiftService;
 import ru.agser.server.service.WorkerService;
 
 import java.time.LocalDate;
@@ -29,7 +31,8 @@ public class ServerApplication {
 	CommandLineRunner run(ChildRepository childRepository,
 						  SquadRepository squadRepository,
 						  WorkerRepository workerRepository,
-						  WorkerService workerService
+						  WorkerService workerService,
+						  ShiftService shiftService
 
 	) {
 		return args -> {
@@ -41,18 +44,10 @@ public class ServerApplication {
 			childRepository.save(new Child(null, null, null, "Мария", "Дубнова", "Александровна", LocalDate.parse("07/29/2013", formatter), 654321, "Москва", 9));
 			childRepository.save(new Child(null, null, null, "Максим", "Ситро", "Викторович", LocalDate.parse("03/04/2010", formatter), 654321, "Воронеж", 12));
 
-//			List<Child> children = childRepository.findAll();
-//			Squad squad = new Squad(null, null, null, 1, 12);
-//			for (Child child : children) {
-//				child.setSquad(squad);
-//			}
-//			squad.setChildren(children);
-//
-//			squadRepository.save(squad);
-//			childRepository.saveAll(children);
-
 			Worker worker = new Worker(null, "John", "Dao", "Dadao", "Moscow", "11 22 33 665544", Position.COUNSELOR, "1234", "Moscow");
 			workerService.save(worker);
+
+			shiftService.save(new Shift(null, 1, 2022, 560, null));
 
 		};
 	}

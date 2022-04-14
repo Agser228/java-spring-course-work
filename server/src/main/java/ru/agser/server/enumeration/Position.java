@@ -1,18 +1,41 @@
 package ru.agser.server.enumeration;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public enum Position {
-    CLEANER("CLEANER"),
-    DIRECTOR("DIRECTOR"),
-    COUNSELOR("COUNSELOR"),
-    ANIMATOR("ANIMATOR");
+    CLEANER("Уборщик"),
+    DIRECTOR("Директор"),
+    COUNSELOR("Вожатый"),
+    ANIMATOR("Аниматор");
 
-    private final String position;
+    private static final Map<String, Position> positions;
 
-    Position(String position) {
-        this.position = position;
+    public static Map<String, Position> getPositions() {
+        return positions;
     }
 
-    public String getPosition() {
-        return this.position;
+    static {
+        positions = new HashMap<>();
+        for (Position position : Position.values()) {
+            positions.put(position.name, position);
+        }
+    }
+    private final String name;
+
+    Position(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+    public static Position fromPositionName(String positionName) {
+        return positions.get(positionName);
     }
 }

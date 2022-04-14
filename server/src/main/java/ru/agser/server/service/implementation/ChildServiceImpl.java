@@ -29,4 +29,9 @@ public class ChildServiceImpl extends AbstractServiceImpl<Child, ChildRepository
                 .sorted(comparator)
                 .collect(Collectors.toList()));
     }
+
+    @Override
+    public long getAmount() {
+        return repository.count();
+    }
 }

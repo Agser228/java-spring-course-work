@@ -1,102 +1,82 @@
 [
   {
-    "parent": {
-      "name": "Clarke",
-      "surname": "Justine",
-      "patronymic": "Mari",
-      "placeIssuePassport": "P.O. Box 572, 1577 Sed St.",
-      "seriesNumberPassport": "B594DCE6-533E-D471-4E95-B54608FE081E",
-      "phoneNumber": "(07) 8862 8277",
-      "address": "Moncton"
-    },
-    "child": {
-      "name": "Colton",
-      "surname": "Adara",
-      "patronymic": "Cheyenne",
-      "dateBirth": "05/01/2013",
-      "birthCertificateNumber": 7910530,
-      "address": "Yekaterinburg",
-      "age": 12
-    }
+    "parentName": "Clarke",
+    "parentSurname": "Justine",
+    "parentPatronymic": "Mari",
+    "parentPlaceIssuePassport": "P.O. Box 572, 1577 Sed St.",
+    "parentSeriesNumberPassport": "B594DCE6-533E-D471-4E95-B54608FE081E",
+    "parentPhoneNumber": "(07) 8862 8277",
+    "parentAddress": "Moncton",
+    "childName": "Colton",
+    "childSurname": "Adara",
+    "childPatronymic": "Cheyenne",
+    "childDateBirth": "05/01/2013",
+    "childBirthCertificateNumber": 7910530,
+    "childAddress": "Yekaterinburg",
+    "childAge": 12
   },
   {
-    "parent": {
-      "name": "Benjamin",
-      "surname": "Fredericka",
-      "patronymic": "Yardley",
-      "placeIssuePassport": "6528 Sem Av.",
-      "seriesNumberPassport": "4EF7E9ED-D51E-6870-E155-DB4856855A28",
-      "phoneNumber": "(06) 1845 1131",
-      "address": "Ch\u00e2tellerault"
-    },
-    "child": {
-      "name": "Peter",
-      "surname": "Bert",
-      "patronymic": "Maia",
-      "dateBirth": "08/21/2011",
-      "birthCertificateNumber": 4119249,
-      "address": "Bremen",
-      "age": 15
-    }
+    "parentName": "Benjamin",
+    "parentSurname": "Fredericka",
+    "parentPatronymic": "Yardley",
+    "parentPlaceIssuePassport": "6528 Sem Av.",
+    "parentSeriesNumberPassport": "4EF7E9ED-D51E-6870-E155-DB4856855A28",
+    "parentPhoneNumber": "(06) 1845 1131",
+    "parentAddress": "Ch\u00e2tellerault",
+    "childName": "Peter",
+    "childSurname": "Bert",
+    "childPatronymic": "Maia",
+    "childDateBirth": "08/21/2011",
+    "childBirthCertificateNumber": 4119249,
+    "childAddress": "Bremen",
+    "childAge": 15
   },
   {
-    "parent": {
-      "name": "Francesca",
-      "surname": "Vera",
-      "patronymic": "Jamalia",
-      "placeIssuePassport": "436-8308 Tortor, Rd.",
-      "seriesNumberPassport": "D9855132-7F36-693C-CAD8-C11B8C611A8D",
-      "phoneNumber": "(05) 8674 6641",
-      "address": "Gij\u00f3n"
-    },
-    "child": {
-      "name": "Malik",
-      "surname": "Debra",
-      "patronymic": "Lysandra",
-      "dateBirth": "01/02/2012",
-      "birthCertificateNumber": 5587752,
-      "address": "Phalaborwa",
-      "age": 8
-    }
+    "parentName": "Francesca",
+    "parentSurname": "Vera",
+    "parentPatronymic": "Jamalia",
+    "parentPlaceIssuePassport": "436-8308 Tortor, Rd.",
+    "parentSeriesNumberPassport": "D9855132-7F36-693C-CAD8-C11B8C611A8D",
+    "parentPhoneNumber": "(05) 8674 6641",
+    "parentAddress": "Gij\u00f3n",
+    "childName": "Malik",
+    "childSurname": "Debra",
+    "childPatronymic": "Lysandra",
+    "childDateBirth": "01/02/2012",
+    "childBirthCertificateNumber": 5587752,
+    "childAddress": "Phalaborwa",
+    "childAge": 8
   },
   {
-    "parent": {
-      "name": "Walker",
-      "surname": "Lana",
-      "patronymic": "Barry",
-      "placeIssuePassport": "681-3848 Dui, Rd.",
-      "seriesNumberPassport": "5D1083E8-53B2-A91B-85CD-617B786EB463",
-      "phoneNumber": "(03) 4374 5373",
-      "address": "Alkmaar"
-    },
-    "child": {
-      "name": "Nigel",
-      "surname": "Michelle",
-      "patronymic": "Candice",
-      "dateBirth": "03/20/2012",
-      "birthCertificateNumber": 1825198,
-      "address": "Sydney",
-      "age": 13
-    }
+    "parentName": "Walker",
+    "parentSurname": "Lana",
+    "parentPatronymic": "Barry",
+    "parentPlaceIssuePassport": "681-3848 Dui, Rd.",
+    "parentSeriesNumberPassport": "5D1083E8-53B2-A91B-85CD-617B786EB463",
+    "parentPhoneNumber": "(03) 4374 5373",
+    "parentAddress": "Alkmaar",
+    "childName": "Nigel",
+    "childSurname": "Michelle",
+    "childPatronymic": "Candice",
+    "childDateBirth": "03/20/2012",
+    "childBirthCertificateNumber": 1825198,
+    "childAddress": "Sydney",
+    "childAge": 13
   },
   {
-    "parent": {
-      "name": "Warren",
-      "surname": "Isabella",
-      "patronymic": "Indira",
-      "placeIssuePassport": "P.O. Box 839, 2146 Hymenaeos. Rd.",
-      "seriesNumberPassport": "85574FC8-D5EA-4432-D494-2CC97ECB5494",
-      "phoneNumber": "(02) 3511 1887",
-      "address": "Seletar"
-    },
-    "child": {
-      "name": "Igor",
-      "surname": "Aidan",
-      "patronymic": "Imogene",
-      "dateBirth": "06/26/2011",
-      "birthCertificateNumber": 4799028,
-      "address": "Colorado Springs",
-      "age": 11
-    }
+    "parentName": "Warren",
+    "parentSurname": "Isabella",
+    "parentPatronymic": "Indira",
+    "parentPlaceIssuePassport": "P.O. Box 839, 2146 Hymenaeos. Rd.",
+    "parentSeriesNumberPassport": "85574FC8-D5EA-4432-D494-2CC97ECB5494",
+    "parentPhoneNumber": "(02) 3511 1887",
+    "parentAddress": "Seletar",
+    "childName": "Igor",
+    "childSurname": "Aidan",
+    "childPatronymic": "Imogene",
+    "childDateBirth": "06/26/2011",
+    "childBirthCertificateNumber": 4799028,
+    "childAddress": "Colorado Springs",
+    "childAge": 11
   }
 ]

@@ -2,20 +2,23 @@ package ru.agser.server.service.implementation;
 
 import org.springframework.stereotype.Service;
 import ru.agser.server.model.Child;
+import ru.agser.server.model.Shift;
 import ru.agser.server.model.Squad;
 import ru.agser.server.model.Worker;
 import ru.agser.server.model.comparator.AgeChildComparator;
-import ru.agser.server.model.dto.RequestCreateSquads;
 import ru.agser.server.repo.SquadRepository;
 import ru.agser.server.service.ChildService;
+import ru.agser.server.service.ShiftService;
 import ru.agser.server.service.SquadService;
 import ru.agser.server.service.WorkerService;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Stack;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,28 +27,32 @@ public class SquadServiceImpl extends AbstractServiceImpl<Squad, SquadRepository
 
     private final ChildService childService;
     private final WorkerService workerService;
+    private final ShiftService shiftService;
 
     public SquadServiceImpl(SquadRepository repository,
                             ChildService childService,
-                            WorkerService workerService) {
+                            WorkerService workerService,
+                            ShiftService shiftService) {
         super(repository);
         this.childService = childService;
         this.workerService = workerService;
+        this.shiftService = shiftService;
     }
 
     @Override
-    public List<Squad> createSquads(RequestCreateSquads requestCreateSquads) {
-        int amountSquads = requestCreateSquads.getAmountSquads();
-        int squadSize = requestCreateSquads.getSquadSize();
+    public List<Squad> createSquads(Map<String, String> payload) {
+        int amountSquads = Integer.parseInt((payload.get("amountSquads")));
+        Shift shift = shiftService.getById(Long.parseLong(payload.get("shiftId")));
 
         // Sort chidlren
         List<Child> sortedChildren = childService.getAllChildrenSortedBy(new AgeChildComparator());
-
+        System.out.println("Количество детей: " + sortedChildren.size());
         // Split children
         List<List<Child>> splittedChildren = splitChildrenOnSquadsEvenly(sortedChildren, amountSquads);
+        System.out.println("Количество отрядов: " + splittedChildren.size());
 
         // Squads filled by children
-        fillSquadsByChildren(splittedChildren);
+        fillSquadsByChildren(splittedChildren, shift);
 
         return new ArrayList<>(getAll());
     }
@@ -55,6 +62,13 @@ public class SquadServiceImpl extends AbstractServiceImpl<Squad, SquadRepository
         Worker counselor = workerService.getById(counselorId);
         Squad squad = getById(squadId);
         squad.setWorker(counselor);
+        return save(squad);
+    }
+
+    @Override
+    public Squad disattachCounselorToSquad(Long squadId) {
+        Squad squad = getById(squadId);
+        squad.setWorker(null);
         return save(squad);
     }
 
@@ -76,7 +90,14 @@ public class SquadServiceImpl extends AbstractServiceImpl<Squad, SquadRepository
         return child;
     }
 
-    private void fillSquadsByChildren(List<List<Child>> listChildren) {
+    @Override
+    public Squad getSquadAttachedToCounselor(Long counselorId) {
+        Worker counselor = workerService.getById(counselorId);
+        return repository.findSquadByWorker(counselor);
+    }
+
+    private void fillSquadsByChildren(List<List<Child>> listChildren, Shift shift) {
+        AtomicInteger counter = new AtomicInteger();
         for (List<Child> children : listChildren) {
             Squad squad  = new Squad();
             int averageAge = children
@@ -87,9 +108,15 @@ public class SquadServiceImpl extends AbstractServiceImpl<Squad, SquadRepository
 
             squad.setChildren(children);
             squad.setAverageAgeChildren(averageAge);
+            squad.setShift(shift);
+            squad.setNumber(counter.incrementAndGet());
+
             repository.save(squad);
             childService.saveAll(children);
         }
+        shift.setSquads(repository.findAllByShift(shift));
+        shift.setAmountPlaces(childService.getAmount());
+        shiftService.save(shift);
     }
 
     private List<List<Child>> splitChildrenOnSquadsEvenly(List<Child> sortedChildren, int amountSquads) {
@@ -103,6 +130,8 @@ public class SquadServiceImpl extends AbstractServiceImpl<Squad, SquadRepository
         while (!stackSortedChildren.isEmpty()) {
             for (List<Child> children : splittedChildren) {
                 children.add(stackSortedChildren.pop());
+                if (stackSortedChildren.isEmpty()) break;
+                System.out.println("size : " + stackSortedChildren.size());
             }
         }
 

@@ -8,4 +8,5 @@ import java.util.List;
 public interface ChildService extends AbstractService<Child>{
 
     List<Child> getAllChildrenSortedBy(Comparator<Child> comparator);
+    long getAmount();
 }
