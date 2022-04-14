@@ -19,7 +19,6 @@ import java.util.Map;
 @RequestMapping("/api/v1/squad")
 public class SquadController extends AbstractController<Squad, SquadService>{
 
-    @Autowired
     public SquadController(SquadService service) {
         super(service);
     }

@@ -4,6 +4,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import ru.agser.server.controller.WorkerController;
 import ru.agser.server.enumeration.Position;
 import ru.agser.server.model.Child;
 import ru.agser.server.model.Squad;
@@ -11,6 +12,7 @@ import ru.agser.server.model.Worker;
 import ru.agser.server.repo.ChildRepository;
 import ru.agser.server.repo.SquadRepository;
 import ru.agser.server.repo.WorkerRepository;
+import ru.agser.server.service.WorkerService;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -26,7 +28,8 @@ public class ServerApplication {
 	@Bean
 	CommandLineRunner run(ChildRepository childRepository,
 						  SquadRepository squadRepository,
-						  WorkerRepository workerRepository
+						  WorkerRepository workerRepository,
+						  WorkerService workerService
 
 	) {
 		return args -> {
@@ -49,8 +52,7 @@ public class ServerApplication {
 //			childRepository.saveAll(children);
 
 			Worker worker = new Worker(null, "John", "Dao", "Dadao", "Moscow", "11 22 33 665544", Position.COUNSELOR, "1234", "Moscow");
-			workerRepository.save(worker);
-
+			workerService.save(worker);
 
 		};
 	}

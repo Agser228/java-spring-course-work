@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 @Transactional
 public class ChildServiceImpl extends AbstractServiceImpl<Child, ChildRepository> implements ChildService {
 
-    @Autowired
     public ChildServiceImpl(ChildRepository repository) {
         super(repository);
     }

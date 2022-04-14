@@ -12,7 +12,6 @@ import javax.transaction.Transactional;
 @Transactional
 public class ParentServiceImpl extends AbstractServiceImpl<Parent, ParentRepository> implements ParentService {
 
-    @Autowired
     public ParentServiceImpl(ParentRepository repository) {
         super(repository);
     }
