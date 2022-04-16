@@ -2,7 +2,6 @@ package ru.agser.server.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -12,10 +11,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
-import java.security.Permission;
-
-import static ru.agser.server.security.UserPermission.*;
-import static ru.agser.server.security.UserRole.*;
+import static ru.agser.server.security.UserRole.ADMIN;
+import static ru.agser.server.security.UserRole.COUNSELOR;
+import static ru.agser.server.security.UserRole.PARENT;
 
 @Configuration
 @EnableWebSecurity
@@ -32,17 +30,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-                .authorizeRequests()
+                .cors();
+//                .csrf().disable()
+//                .cors().and()
+//                .authorizeRequests()
 //                .antMatchers(HttpMethod.POST, "/api/v1/child/**").hasAuthority(CHILD_WRITE.getPermission())
 //                .antMatchers(HttpMethod.GET, "/api/v1/child/**").hasAuthority(CHILD_READ.getPermission())
 //                .antMatchers(HttpMethod.POST, "/api/v1/squad/**").hasAuthority(SQUAD_WRITE.getPermission())
 //                .antMatchers(HttpMethod.GET, "/api/v1/squad/**").hasAuthority(SQUAD_READ.getPermission())
 //                .antMatchers("/api/v1/**").hasRole(ADMIN.name())
-
-                .anyRequest()
-                .authenticated()
-                .and()
-                .httpBasic();
+//
+//                .anyRequest().authenticated().and()
+//                .httpBasic();
     }
 
     @Override

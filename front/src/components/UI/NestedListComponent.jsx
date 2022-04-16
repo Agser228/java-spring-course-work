@@ -2,6 +2,7 @@ import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import StarBorder from "@mui/icons-material/StarBorder";
+import { Grid, Card, CardContent, Typography, CardActions, Button} from "@mui/material";
 import Collapse from "@mui/material/Collapse";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -17,37 +18,76 @@ export default function NestedListComponent({squads}) {
   };
 
   return (
-    <List
-      sx={{ width: "100%", bgcolor: "background.paper" }}
-      component="nav"
+
+    <Grid container 
+    spacing={4}
+    sx = {{
+      alignItems: "center"
+    }}
     >
-    { squads.map((squad) => 
-    <div>
-      <ListItemButton onClick={handleClick}>
-        <ListItemIcon>
-          <InboxIcon />
-        </ListItemIcon>
-        <ListItemText primary={`Отряд №${squad.id}`} />
-        {open ? <ExpandLess /> : <ExpandMore />}
+      {
+        squads.map((squad) => (
+          <Grid item id={squad.id} xs={12} sm={6} md={4}>
+              <Card
+                sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
+              >
+                <CardContent>
+                <Typography gutterBottom variant="h5" component="h2">
+                    {`Отряд №${squad.number}`}
+                    </Typography>
+                    <Typography paragraph>
+                    {`Средний возраст: ${squad.averageAgeChildren}`}
+                    </Typography>
+                    <Typography paragraph>
+                    {`Размер отряда: ${squad.children.length}`}
+                    </Typography>
+                </CardContent>
+                <CardActions>
+                    <Button size="small">Посмотреть отряд</Button>
+                  </CardActions>
+              </Card>
+          </Grid>
+        ))
+      }
+
+
+
+    </Grid>
+
+
+
+
+//     <List
+//       sx={{ width: "100%", bgcolor: "background.paper" }}
+//       component="nav"
+//     >
+//     { squads.map((squad) => 
+//     <div>
+//       <ListItemButton onClick={handleClick}>
+//         <ListItemIcon>
+//           <InboxIcon />
+//         </ListItemIcon>
+//         <ListItemText primary={`Отряд №${squad.id}`} />
+//         {open ? <ExpandLess /> : <ExpandMore />}
 
         
-      </ListItemButton>
-      <Collapse in={open} timeout="auto" unmountOnExit>
-      { squad.children.map((child) =>
-            <List component="div" disablePadding>
-            <ListItemButton sx={{ pl: 4 }}>
-                <ListItemIcon>
-                <StarBorder />
-                </ListItemIcon>
-                <ListItemText primary={`${child.name} ${child.surname}`} />
-            </ListItemButton>
-            </List>
-      )
-    }
-    </Collapse>
-      </div>
-    )
-}
-    </List>
+//       </ListItemButton>
+//       <Collapse in={open} timeout="auto" unmountOnExit>
+//       { squad.children.map((child) =>
+//             <List component="div" disablePadding>
+//             <ListItemButton sx={{ pl: 4 }}>
+//                 <ListItemIcon>
+//                 <StarBorder />
+//                 </ListItemIcon>
+//                 <ListItemText primary={`${child.name} ${child.surname}`} />
+//             </ListItemButton>
+//             </List>
+//       )
+//     }
+//     </Collapse>
+//       </div>
+//     )
+// }
+//     </List>
   );
 }

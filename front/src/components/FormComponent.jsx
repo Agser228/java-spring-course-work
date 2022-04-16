@@ -3,8 +3,9 @@ import { useEffect, useState } from 'react';
 import SchemaService from '../services/SchemaService';
 import { dictionary, ignore } from '../utils/dictionary';
 import "../App.css"
+import { Box, TextField } from '@mui/material';
 
-const FormComponent = ({entity, formName, setter}) => {
+const FormComponent = ({entity, formName, setter, cleaner}) => {
 
     const[schema, setSchema] = useState([])
     const[form, setForm] = useState({})
@@ -13,39 +14,64 @@ const FormComponent = ({entity, formName, setter}) => {
             let filterSchema = schema.filter((field) => !ignore.includes(field))
             setSchema(filterSchema);
         });
+        cleaner(() => clearForm);
         console.log("after filter:", schema.filter((field) => !ignore.includes(field)));
 
     }, []);
 
+    
 
+    useEffect(() => {
+        setter(form);
+    }, [form])
+
+    const clearForm = () => {
+        document.querySelectorAll("input").forEach(
+                input => (input.value = "")
+              );
+        setForm({});
+    }
+
+    
 
     const onChange = (e) => {
         setForm(form => ({...form, [e.target.name] : e.target.value}));
-        console.log("form:", form);
-        setter(form);
     }
 
     return (
-            <form style={{display: "flex", flexDirection: "column"}}>
+            <Box component="form"
+
+                sx={{
+                    minWidth: 350, display: "flex", flexDirection: "column"
+                }}
+            >
+
+            
                 <h3>{formName}</h3>
                 {
                     schema.map((field) =>
-                    <input 
-                    type="text" 
-                    id={field + Date.now()} 
-                    placeholder={dictionary[field]}
-                    name={field}
-                    className="field"
-                    value={form.field}
-                    onChange={e => {
-                        setForm(form => ({...form, [field] : e.target.value}));
-                        console.log(form);
-                        setter(form);
-                    }}
-                    />
+
+                    <TextField
+                        margin='normal'
+                        required
+                        id={field+Date.now()}
+                        label={dictionary[field]}
+                        name={field}
+                        onChange={onChange}
+                        fullWidth
+                        />
+                        // <input 
+                    // type="text" 
+                    // id={field + Date.now()} 
+                    // placeholder={dictionary[field]}
+                    // name={field}
+                    // className="field"
+                    // value={form.field}
+                    // onChange={onChange}
+                    // />
                     )
                 }
-            </form>
+            </Box>
     );
 };
 

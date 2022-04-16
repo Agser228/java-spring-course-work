@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ChildService from '../services/ChildService';
 import { useNavigate } from 'react-router-dom';
+import { Container, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 
 const Children = () => {
     
@@ -31,51 +32,53 @@ const Children = () => {
 
     const deleteChild = (id) => {
         ChildService.deleteChild(id).then((res) => {
-            setChildren({children: children.filter(child => child.id !== id)})
+            setChildren([children.filter(child => child.id !== id)])
         }); 
     }
     
     console.log("children", children);
     return (
-<div>
-                <h2 className='text-center'>Список детей</h2>
-                
-                <button className='btn btn-primary' onClick={addChild}> Добавить ребенка </button>
-                
-                <div className='row'>
-                    <table className='table table-striped table-bordered'>
-                        <thead>
-                            <tr>
-                                <th>Фамилия</th>
-                                <th>Имя</th>
-                                <th>Отчество</th>
-                                <th>День рождения</th>
-                                <th>Действия</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                children.map(
-                                    child => 
-                                    <tr key = {child.id}>
-                                        <td>{child.name}</td>
-                                        <td>{child.surname}</td>
-                                        <td>{child.patronymic}</td>
-                                        <td>{child.dateBirth}</td>
-                                        <td>
-                                            <button onClick={() => editChild(child.id)} className="btn btn-primary">Обновить</button>
-                                            <button style={{marginLeft: "10px"}} onClick={() => deleteChild(child.id)} className="btn btn-danger">Удалить</button>
-                                            <button style={{marginLeft: "10px"}} onClick={() => viewChild(child.id)} className="btn btn-secondary">Детали</button>
-                                        </td>
+        <TableContainer
+        component={Paper}
+        sx={{
+            mt: 5,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center"
+        }}
+        >
+            <Table
+                        sx={{
+                            maxWidth: 500
+                        }}
+>
+                <TableHead>
+                    <TableRow>
+                        <TableCell>Имя</TableCell>
+                        <TableCell>Фамилия</TableCell>
+                        <TableCell>Отчество</TableCell>
+                        <TableCell>Дата рождения</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {
+                        children.map((child) => (
+                            <TableRow
+                                key={child.id}
+                            >
+                                <TableCell align="right">{child.name}</TableCell>
+                                <TableCell align="right">{child.surname}</TableCell>
+                                <TableCell align="right">{child.patronymic}</TableCell>
+                                <TableCell align="right">{child.dateBirth}</TableCell>
 
-                                    </tr>
-                                    
-                                )
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+                            </TableRow>
+
+                        ))
+                    }
+                </TableBody>
+            </Table>
+            
+        </TableContainer>
     );
 };
 
