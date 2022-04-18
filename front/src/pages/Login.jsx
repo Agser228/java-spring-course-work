@@ -1,16 +1,28 @@
 import { AuthContext } from '../context';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Avatar, Box, Button, Container, Paper, TextField, Typography } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import AuthService from '../services/AuthService';
 
 const Login = () => {
 
-    const {setIsAuth} = useContext(AuthContext);
-
+    const {setIsAuth, setAccess} = useContext(AuthContext);
+    
+    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("");
 
     const login = (e) => {
+
+        AuthService.login(email, password).then((res) => {
+         console.log(res);   
+        })
         localStorage.setItem("auth", "true");
+        
         e.preventDefault();
+        
+        let role = email;
+        setAccess(role);
+        localStorage.setItem("access", role);
         setIsAuth(true);
     }
 
@@ -47,8 +59,9 @@ const Login = () => {
 
                 <TextField 
                 margin="normal"
-                label="Логин" 
+                label="Почта" 
                 variant="outlined"
+                onChange={(e) => setEmail(e.target.value)}
                 fullWidth
                 />
                 <TextField 
@@ -56,6 +69,7 @@ const Login = () => {
                 margin="normal"
                 label="Пароль" 
                 variant="outlined"
+                onChange={(e) => setPassword(e.target.value)}
                 />
                 <Button 
                 type="submit"

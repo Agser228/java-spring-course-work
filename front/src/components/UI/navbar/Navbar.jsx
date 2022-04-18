@@ -9,14 +9,22 @@ import { routes } from './../../../router/index';
 
 const Navbar = () => {
     const location = useLocation();
-    const {isAuth, setIsAuth} = useContext(AuthContext);
+    const {isAuth, setIsAuth, access, setAccess} = useContext(AuthContext);
     const navigate = useNavigate();
 
     const isLoginPage = location.pathname === "/login";
     const logout = () => {
         localStorage.removeItem("auth");
+        localStorage.removeItem("access");
         setIsAuth(false);
+        setAccess("all");
     }
+
+    const login = () => {
+      navigate("/login");
+    }
+
+    console.log(access);
 
     return (
         !isLoginPage
@@ -35,15 +43,18 @@ const Navbar = () => {
             </IconButton>
             <nav>
                 {
-                    routes.map(route => 
-                        <Button color="inherit" onClick={() => navigate(route.path)}>
+                    routes[access].map((route, index) => 
+                        <Button key={index} color="inherit" onClick={() => navigate(route.path)}>
                             {route.name}
                         </Button>
                         
                     )
                 }
             </nav>
-            <Button color="inherit" onClick={logout}>Выйти</Button>
+            {isAuth 
+            ? <Button color="inherit" onClick={logout}>Выйти</Button>
+            : <Button color="inherit" onClick={login}>Войти</Button>
+            }
           </Toolbar>
         </AppBar>
       </Box>

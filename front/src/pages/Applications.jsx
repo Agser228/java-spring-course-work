@@ -44,13 +44,15 @@ const Applications = () => {
                 {
                 applications.map((application, index) => (
 
-                    <VoucherItemComponent application={application}/>
+                    <VoucherItemComponent 
+                    key={index}
+                    application={application}/>
                 ))
             }
         </Grid>
         }
 
-
+        
         </Container>
     );
 };

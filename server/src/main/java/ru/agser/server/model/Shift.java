@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
+import ru.agser.server.enumeration.ShiftStatus;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -45,6 +46,7 @@ public class Shift {
     private int number;
     private int currentYear;
     private long amountPlaces;
+    private ShiftStatus status;
 
     @OneToMany(
             cascade = {CascadeType.REMOVE, CascadeType.REFRESH},

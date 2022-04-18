@@ -5,7 +5,7 @@ import { dictionary, ignore } from '../utils/dictionary';
 import "../App.css"
 import { Box, TextField } from '@mui/material';
 
-const FormComponent = ({entity, entityName, formName, setter, cleaner}) => {
+const UpdateFormComponent = ({entity, entityName, formName, setter}) => {
 
     const[schema, setSchema] = useState([])
     const[form, setForm] = useState({})
@@ -14,8 +14,6 @@ const FormComponent = ({entity, entityName, formName, setter, cleaner}) => {
             let filterSchema = schema.filter((field) => !ignore.includes(field))
             setSchema(filterSchema);
         });
-        cleaner(() => clearForm);
-        console.log("after filter:", schema.filter((field) => !ignore.includes(field)));
 
     }, []);
 
@@ -24,15 +22,9 @@ const FormComponent = ({entity, entityName, formName, setter, cleaner}) => {
         setter(form);
     }, [form])
 
-    const clearForm = () => {
-        document.querySelectorAll("input").forEach(
-                input => (input.value = "")
-              );
-        setForm({});
-    }
 
     const onChange = (e) => {
-        setForm(form => ({...form, [e.target.name] : e.target.value}));
+        setForm({...entity, [e.target.name] : e.target.value});
     }
 
     return (
@@ -46,6 +38,7 @@ const FormComponent = ({entity, entityName, formName, setter, cleaner}) => {
                     schema.map((field) =>
 
                     <TextField
+                        
                         margin='normal'
                         required
                         id={field+Date.now()}
@@ -61,4 +54,4 @@ const FormComponent = ({entity, entityName, formName, setter, cleaner}) => {
     );
 };
 
-export default FormComponent;
+export default UpdateFormComponent;

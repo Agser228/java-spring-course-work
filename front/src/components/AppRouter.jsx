@@ -5,10 +5,12 @@ import { routes } from '../router';
 import Login from '../pages/Login';
 import Squads from './../pages/Squads';
 import Children from './../pages/Children';
+import Home from './../pages/Home';
 const AppRouter = () => {
 
-     const {isAuth, isLoading} = useContext(AuthContext);
-    
+     const {isAuth, isLoading, access} = useContext(AuthContext);
+
+
      console.log(isAuth);
      console.log(routes);
 
@@ -24,16 +26,18 @@ const AppRouter = () => {
     isAuth  
     ? <Routes> 
          {
-            routes.map(route => 
+            routes[access].map(route => 
                 <Route 
                 path={route.path} 
                 key={route.path}
                 element={route.component}/>
                 )
             }
-            <Route path="*" element={<Navigate replace to="/children"/>} />
+            <Route path="/" element={<Home/>}/>
+            <Route path="*" element={<Navigate replace to="/"/>} />
     </Routes> 
     : <Routes>
+        <Route path="/" element={<Home/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="*" element={<Navigate replace to="/login"/>}/>
     </Routes>

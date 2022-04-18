@@ -5,7 +5,7 @@ import { dictionary, ignore } from '../utils/dictionary';
 import "../App.css"
 import { Box, TextField } from '@mui/material';
 
-const FormComponent = ({entity, entityName, formName, setter, cleaner}) => {
+const CreateFormComponent = ({entityName, formName, setter, cleaner}) => {
 
     const[schema, setSchema] = useState([])
     const[form, setForm] = useState({})
@@ -15,7 +15,6 @@ const FormComponent = ({entity, entityName, formName, setter, cleaner}) => {
             setSchema(filterSchema);
         });
         cleaner(() => clearForm);
-        console.log("after filter:", schema.filter((field) => !ignore.includes(field)));
 
     }, []);
 
@@ -53,7 +52,6 @@ const FormComponent = ({entity, entityName, formName, setter, cleaner}) => {
                         name={field}
                         onChange={onChange}
                         fullWidth
-                        defaultValue={entity[field]}
                         />
                     )
                 }
@@ -61,4 +59,4 @@ const FormComponent = ({entity, entityName, formName, setter, cleaner}) => {
     );
 };
 
-export default FormComponent;
+export default CreateFormComponent;

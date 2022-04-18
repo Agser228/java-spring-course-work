@@ -49,4 +49,10 @@ public abstract class AbstractServiceImpl<T, R extends AbstractRepository<T>> im
         repository.deleteById(id);
         return true;
     }
+
+    @Override
+    public T updateById(Long id, T updatedEntity) {
+        getById(id);
+        return save(updatedEntity);
+    }
 }

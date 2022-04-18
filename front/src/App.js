@@ -1,6 +1,5 @@
 import { BrowserRouter as Routes, Route, useLocation, useParams } from 'react-router-dom';
 // import './App.css';
-import CreateChildComponent from './components/CreateChildComponent';
 import HeaderComponent from './components/HeaderComponent';
 import ListChildrenComponent from './components/ListChildrenComponent';
 import Footer from './components/UI/footer/Footer';
@@ -19,9 +18,14 @@ function App() {
   
   const [isAuth, setIsAuth] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [access, setAccess] = useState("all");
   useEffect( () => {
     if (localStorage.getItem("auth")) {
       setIsAuth(true);
+    }
+    
+    if (localStorage.getItem("access")) {
+      setAccess(localStorage.getItem("access"));
     }
     setIsLoading(false);
   }, [])
@@ -30,6 +34,8 @@ function App() {
   return (
     <div>
       <AuthContext.Provider value = {{
+        access,
+        setAccess,
         isAuth,
         setIsAuth,
         isLoading

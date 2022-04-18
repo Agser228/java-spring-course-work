@@ -45,7 +45,7 @@ const VoucherItemComponent = ({application}) => {
         <DialogContent>
 
         {Object.keys(application).map(key => 
-        <h5>{`${key} - ${application[key]}`}</h5>
+        <h5 key={key}>{`${key} - ${application[key]}`}</h5>
         )
         }
 

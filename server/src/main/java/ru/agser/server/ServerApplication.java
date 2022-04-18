@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import ru.agser.server.controller.WorkerController;
 import ru.agser.server.enumeration.Position;
+import ru.agser.server.enumeration.ShiftStatus;
 import ru.agser.server.model.Child;
 import ru.agser.server.model.Shift;
 import ru.agser.server.model.Squad;
@@ -47,7 +48,7 @@ public class ServerApplication {
 			Worker worker = new Worker(null, "John", "Dao", "Dadao", "Moscow", "11 22 33 665544", Position.COUNSELOR, "1234", "Moscow");
 			workerService.save(worker);
 
-			shiftService.save(new Shift(null, 1, 2022, 560, null));
+			shiftService.save(new Shift(null, 1, 2022, 560, ShiftStatus.CLOSE, null));
 
 		};
 	}

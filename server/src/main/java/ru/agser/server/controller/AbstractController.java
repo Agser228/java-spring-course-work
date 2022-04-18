@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import ru.agser.server.model.dto.Response;
 import ru.agser.server.service.AbstractService;
@@ -76,6 +77,20 @@ public abstract class AbstractController<T, S extends AbstractService<T>>  {
                         .status(HttpStatus.OK)
                         .statusCode(HttpStatus.OK.value())
                         .data(Map.of("deleted", service.deleteById(id)))
+                        .build()
+        );
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Response> updateById(@PathVariable("id") Long id,
+                                               @RequestBody T updatedEntity) {
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timeStamp(LocalDateTime.now())
+                        .message(String.format("%s deleted", type))
+                        .status(HttpStatus.OK)
+                        .statusCode(HttpStatus.OK.value())
+                        .data(Map.of("updated", service.updateById(id, updatedEntity)))
                         .build()
         );
     }

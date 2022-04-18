@@ -11,4 +11,5 @@ public interface AbstractService<T> {
     T getById(Long id);
     T update(T entity);
     Boolean deleteById(Long id);
+    T updateById(Long id, T updatedEntity);
 }
