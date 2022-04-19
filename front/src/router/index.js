@@ -27,8 +27,8 @@ export const workerRoutes = [
 ]
 
 export const routes = {
-    "admin" : adminRoutes,
-    "parent": parentRoutes,
-    "worker": workerRoutes,
+    "ADMIN" : adminRoutes,
+    "PARENT": parentRoutes,
+    "WORKER": workerRoutes,
     "all": []
 }

@@ -5,25 +5,24 @@ import { AuthContext } from './../../../context/index';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { routes } from './../../../router/index';
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import AuthService from './../../../services/AuthService';
 
 const Navbar = () => {
     const location = useLocation();
-    const {isAuth, setIsAuth, access, setAccess} = useContext(AuthContext);
     const navigate = useNavigate();
+  const {isAuth, access, setIsAuth, setAccess} = useContext(AuthContext);
+  
+
 
     const isLoginPage = location.pathname === "/login";
     const logout = () => {
-        localStorage.removeItem("auth");
-        localStorage.removeItem("access");
-        setIsAuth(false);
-        setAccess("all");
+      setAccess("all");
+      setIsAuth(false);
     }
 
     const login = () => {
       navigate("/login");
     }
-
-    console.log(access);
 
     return (
         !isLoginPage

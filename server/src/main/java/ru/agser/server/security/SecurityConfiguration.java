@@ -5,18 +5,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import ru.agser.server.security.jwt.AuthTokenFilter;
-import ru.agser.server.security.jwt.JwtUsernameAndPasswordAuthenticationFilter;
 
 import static ru.agser.server.security.UserRole.ADMIN;
-import static ru.agser.server.security.UserRole.COUNSELOR;
 import static ru.agser.server.security.UserRole.PARENT;
 
 @Configuration
@@ -50,34 +45,34 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                .httpBasic();
     }
 
-    @Override
-    @Bean
-    protected UserDetailsService userDetailsService() {
-        UserDetails userAdmin = User.builder()
-                .username("admin")
-                .password(passwordEncoder.encode("admin"))
-//                .roles(ADMIN.name()) // ROLE_ADMIN
-                .authorities(ADMIN.getGrantedAuthorities())
-                .build();
-
-        UserDetails userParent = User.builder()
-                .username("parent")
-                .password(passwordEncoder.encode("parent"))
-//                .roles(PARENT.name()) // ROLE_PARENT
-                .authorities(PARENT.getGrantedAuthorities())
-                .build();
-
-        UserDetails userCounselor = User.builder()
-                .username("counselor")
-                .password(passwordEncoder.encode("counselor"))
-//                .roles(COUNSELOR.name()) // ROLE_COUNSELOR
-                .authorities(COUNSELOR.getGrantedAuthorities())
-                .build();
-
-        return new InMemoryUserDetailsManager(
-                userAdmin,
-                userParent,
-                userCounselor
-        );
-    }
+//    @Override
+//    @Bean
+//    protected UserDetailsService userDetailsService() {
+//        UserDetails userAdmin = User.builder()
+//                .username("admin")
+//                .password(passwordEncoder.encode("admin"))
+////                .roles(ADMIN.name()) // ROLE_ADMIN
+//                .authorities(ADMIN.getGrantedAuthorities())
+//                .build();
+//
+//        UserDetails userParent = User.builder()
+//                .username("parent")
+//                .password(passwordEncoder.encode("parent"))
+////                .roles(PARENT.name()) // ROLE_PARENT
+//                .authorities(PARENT.getGrantedAuthorities())
+//                .build();
+//
+//        UserDetails userCounselor = User.builder()
+//                .username("counselor")
+//                .password(passwordEncoder.encode("counselor"))
+////                .roles(COUNSELOR.name()) // ROLE_COUNSELOR
+//                .authorities(COUNSELOR.getGrantedAuthorities())
+//                .build();
+//
+//        return new InMemoryUserDetailsManager(
+//                userAdmin,
+//                userParent,
+//                userCounselor
+//        );
+//    }
 }

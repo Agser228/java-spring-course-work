@@ -14,7 +14,7 @@ import static ru.agser.server.security.UserPermission.SQUAD_WRITE;
 
 public enum UserRole {
     ADMIN(Sets.newHashSet(CHILD_READ, CHILD_WRITE, SQUAD_WRITE, SQUAD_READ)),
-    COUNSELOR(Sets.newHashSet(CHILD_READ)),
+    WORKER(Sets.newHashSet(CHILD_READ)),
     PARENT(Sets.newHashSet(CHILD_READ, SQUAD_READ));
 
     private final Set<UserPermission> permissions;
