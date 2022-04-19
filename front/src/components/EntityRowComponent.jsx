@@ -5,6 +5,7 @@ import DialogFormComponent from './DialogFormComponent';
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import InfoRoundedIcon from '@mui/icons-material/InfoRounded';
+import { enumeration } from './../utils/enum';
 
 
 const EntityRowComponent = ({
@@ -58,8 +59,10 @@ const EntityRowComponent = ({
         />
 
         {header.map((key) => (
-            <TableCell key={key}>{entity[key]}</TableCell>
-        ))
+            ! enumeration[key]
+            ? <TableCell key={key}>{entity[key]}</TableCell>
+            : <TableCell key={key}>{enumeration[key][entity[key]]}</TableCell>
+            ))
         }
 
         <TableCell>

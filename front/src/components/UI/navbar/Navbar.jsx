@@ -1,11 +1,10 @@
 
 import { AppBar, Box, Button, CssBaseline, IconButton, Toolbar, Typography, MenuItem } from '@mui/material';
 import React, { useContext } from 'react';
-import MenuIcon from '@mui/icons-material/Menu';
 import { AuthContext } from './../../../context/index';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { routes } from './../../../router/index';
-
+import AccountCircle from '@mui/icons-material/AccountCircle';
 
 const Navbar = () => {
     const location = useLocation();
@@ -32,15 +31,18 @@ const Navbar = () => {
             <CssBaseline />
         <AppBar position="static">
           <Toolbar sx={{display: "flex", justifyContent: "space-between"}}>
-            <IconButton
+            { isAuth 
+             ? <IconButton
               size="large"
               edge="start"
               color="inherit"
-              aria-label="menu"
+              aria-label="account"
               sx={{ mr: 2 }}
             >
-              <MenuIcon />
+              <AccountCircle />
             </IconButton>
+            : null
+          }
             <nav>
                 {
                     routes[access].map((route, index) => 

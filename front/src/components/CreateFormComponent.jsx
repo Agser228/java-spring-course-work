@@ -2,8 +2,9 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import SchemaService from '../services/SchemaService';
 import { dictionary, ignore } from '../utils/dictionary';
+import { enumeration } from '../utils/enum';
 import "../App.css"
-import { Box, TextField } from '@mui/material';
+import { Box, FormControl, InputLabel, TextField, Select, MenuItem } from '@mui/material';
 
 const CreateFormComponent = ({entityName, formName, setter, cleaner}) => {
 
@@ -44,15 +45,36 @@ const CreateFormComponent = ({entityName, formName, setter, cleaner}) => {
                 {
                     schema.map((field) =>
 
-                    <TextField
-                        margin='normal'
-                        required
-                        id={field+Date.now()}
-                        label={dictionary[field]}
-                        name={field}
-                        onChange={onChange}
-                        fullWidth
-                        />
+                    (!enumeration[field] ?
+                        <TextField
+                            
+                            margin='normal'
+                            required
+                            id={field+Date.now()}
+                            label={dictionary[field]}
+                            name={field}
+                            onChange={onChange}
+                            fullWidth
+                            />
+                            : 
+                            <FormControl>
+                                <InputLabel id="select-label">{dictionary[field]}</InputLabel>
+                                <Select
+                                name={field}
+                                labelId='select-label'
+                                label={dictionary[field]}
+                                onChange={onChange}
+                                >
+                                    {
+                                        Object.entries(enumeration[field]).map(([key, value]) => (
+                                            <MenuItem value={key}>{value}</MenuItem>
+                                        ))
+                                    }
+                                </Select>
+    
+                            </FormControl>
+                            
+                        )
                     )
                 }
             </Box>

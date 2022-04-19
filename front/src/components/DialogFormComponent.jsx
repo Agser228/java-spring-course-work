@@ -11,6 +11,7 @@ const DialogFormComponent = ({open, onClose, entity, entityName, callback, purpo
 
     const updateEntity = (e) => {
         e.preventDefault();
+        console.log(updatedEntity);
         callback(entity.id, {...entity, ...updatedEntity});
         onClose();
     }

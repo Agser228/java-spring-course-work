@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Card, CardContent, CardActions, Button, DialogContent, DialogActions, Dialog, DialogTitle, Typography, Grid } from '@mui/material';
+import { dictionary, ignore } from '../utils/dictionary';
+import { Box, Card, CardContent, CardActions, Button, DialogContent, DialogActions, Dialog, DialogTitle, Typography, Grid } from '@mui/material';
 
 const VoucherItemComponent = ({application}) => {
     const [open, setOpen] = useState(false);
@@ -38,16 +39,28 @@ const VoucherItemComponent = ({application}) => {
         onClose={handleClose}
         >
         <DialogTitle>
-        <Typography>
-        {`Заявка №${application.id}`}
+
+        <Typography variant="h6" sx={{
+            md: 2
+        }}>
+            {`Информация по заявке №${application.id}`}
         </Typography>
         </DialogTitle>
         <DialogContent>
-
-        {Object.keys(application).map(key => 
-        <h5 key={key}>{`${key} - ${application[key]}`}</h5>
-        )
-        }
+            {Object.keys(application)
+            .filter((key) => !ignore.includes(key))
+            .map(key => 
+            (   <Box 
+                key={key}
+                sx={{
+                display: "flex",
+                justifyContent: "space-between"
+                }}>
+                <Typography>{dictionary[key]}</Typography>  
+                <Typography>{application[key]}</Typography>  
+                </Box>
+            
+            ))}
 
         </DialogContent>
         <DialogActions>

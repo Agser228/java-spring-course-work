@@ -22,6 +22,7 @@ export default class ShiftService {
     }
 
     static async update(id, shift) {
+        console.log(shift);
         let res = await axios.put(SHIFT_API_BASE_URL + "update/" + id, shift)
         return res.data.data.updated;
     }

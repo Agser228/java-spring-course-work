@@ -9,6 +9,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import React, {useState } from "react";
+import ItemSquadComponent from './../ItemSquadComponent';
 
 export default function NestedListComponent({squads}) {
   const [open, setOpen] = useState(true);
@@ -16,6 +17,8 @@ export default function NestedListComponent({squads}) {
   const handleClick = () => {
     setOpen(!open);
   };
+
+
 
   return (
 
@@ -27,25 +30,8 @@ export default function NestedListComponent({squads}) {
     >
       {
         squads.map((squad) => (
-          <Grid item id={squad.id} xs={12} sm={6} md={4}>
-              <Card
-                sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
-              >
-                <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
-                    {`Отряд №${squad.number}`}
-                    </Typography>
-                    <Typography paragraph>
-                    {`Средний возраст: ${squad.averageAgeChildren}`}
-                    </Typography>
-                    <Typography paragraph>
-                    {`Размер отряда: ${squad.children.length}`}
-                    </Typography>
-                </CardContent>
-                <CardActions>
-                    <Button size="small">Посмотреть отряд</Button>
-                  </CardActions>
-              </Card>
+          <Grid item key={squad.id} xs={12} sm={6} md={4}>
+            <ItemSquadComponent squad={squad}/>
           </Grid>
         ))
       }

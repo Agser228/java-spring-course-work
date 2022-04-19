@@ -78,11 +78,13 @@ const Workers = () => {
     }
 
     return (
-        <Container 
+        <Container
+        maxWidth="md"
         component={Paper}
-        maxWidth="lg"
         sx={{
-            height: 400
+            mt: 2,
+            p: 6,
+            mb: 2
         }}
         >
             <Button onClick={handleOpen}>

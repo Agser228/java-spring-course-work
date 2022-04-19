@@ -42,7 +42,15 @@ const Children = ({editable}) => {
     
     console.log("children", children);
     return (
-        <div>
+        <Container
+        maxWidth="md"
+        component={Paper}
+        sx={{
+            mt: 2,
+            p: 6,
+            mb: 2
+        }}
+        >
         <EntityTableComponent 
         entityName={"child"}
         header={["surname", "name", "patronymic", "dateBirth"]}
@@ -51,7 +59,7 @@ const Children = ({editable}) => {
         update={updateChild}
         del={deleteChild}
         />
-        </div>
+        </Container>
 
     );
 };
