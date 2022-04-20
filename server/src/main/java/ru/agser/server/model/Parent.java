@@ -52,6 +52,7 @@ public class Parent {
     private String name;
     private String surname;
     private String patronymic;
+    private String email;
 
     private String placeIssuePassport;
     private String seriesNumberPassport;

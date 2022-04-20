@@ -28,9 +28,15 @@ export default class AuthService {
     
       }
     
-      static async register(username, email, password) {
-        return axios.post(AUTH_API_BASE_URL + "signup", {
-          username,
+      static async registerWorker(email, password) {
+        return axios.post(AUTH_API_BASE_URL + "signup-worker", {
+          email,
+          password
+        });
+      }
+
+      static async registerParent(email, password) {
+        return axios.post(AUTH_API_BASE_URL + "signup-parent", {
           email,
           password
         });

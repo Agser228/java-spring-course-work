@@ -24,7 +24,9 @@ const Squads = () => {
 
     useEffect(() => {
             SquadService.getAllSquads().then((squads) => {
-                setSquads(squads);
+                let sortedSquads = squads.sort((a, b) => a.number - b.number);
+                console.log(sortedSquads);
+                setSquads(sortedSquads);
             });
 
             ShiftService.getAllShifts().then((shifts) => {

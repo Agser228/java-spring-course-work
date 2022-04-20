@@ -45,7 +45,7 @@ public class ServerApplication {
 			childRepository.save(new Child(null, null, null, "Мария", "Дубнова", "Александровна", LocalDate.parse("07/29/2013", formatter), 654321, "Москва", 9));
 			childRepository.save(new Child(null, null, null, "Максим", "Ситро", "Викторович", LocalDate.parse("03/04/2010", formatter), 654321, "Воронеж", 12));
 
-			Worker worker = new Worker(null, "John", "Dao", "Dadao", "Moscow", "11 22 33 665544", Position.COUNSELOR, "1234", "Moscow");
+			Worker worker = new Worker(null, "John", "Dao", "Dadao", "Moscow", "11 22 33 665544", "johndao@mail.com", Position.COUNSELOR, "1234", "Moscow");
 			workerService.save(worker);
 
 			shiftService.save(new Shift(null, 1, 2022, 560, ShiftStatus.CLOSE, null));

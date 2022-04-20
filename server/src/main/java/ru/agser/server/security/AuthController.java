@@ -27,16 +27,26 @@ public class AuthController {
         this.userService = userService;
     }
 
-    @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@RequestBody SignUpRequest signUpRequest) {
+    @PostMapping("/signup-worker")
+    public ResponseEntity<Response> registerUser(@RequestBody SignUpRequest signUpRequest) {
         System.out.println(signUpRequest);
 
 
-        User signedUpUser = userService.signUp(signUpRequest);
-
-        return ResponseEntity
-                .ok()
-                .body(signUpRequest);
+        User user = userService.signUpWorker(signUpRequest.getEmail(), signUpRequest.getPassword());
+        Map<?, ?> data;
+        if (user != null) {
+            data = Map.of("user", user, "success", true);
+        } else {
+            data = Map.of("user", "User already exists", "success", false);
+        }
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timeStamp(LocalDateTime.now())
+                        .message("worker signed up")
+                        .status(HttpStatus.OK)
+                        .statusCode(HttpStatus.OK.value())
+                        .data(data)
+                        .build());
     }
 
     @PostMapping("/signin")
@@ -44,8 +54,8 @@ public class AuthController {
         System.out.println(signInRequest);
 
 
-        User user = userService.signIn(signInRequest);
-        Map<?, ?> data = new HashMap<>();
+        User user = userService.signIn(signInRequest.getEmail(), signInRequest.getPassword());
+        Map<?, ?> data;
         if (user != null) {
             data = Map.of("user", user, "success", true);
         } else {
@@ -58,8 +68,7 @@ public class AuthController {
                         .status(HttpStatus.OK)
                         .statusCode(HttpStatus.OK.value())
                         .data(data)
-                        .build()
-        );
+                        .build());
     }
 
 }

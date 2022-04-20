@@ -24,17 +24,16 @@ export default class WorkerService {
         return res.data.data.deleted;
     }
 
+    static async getAllCounselors() {
+        let res = await axios.get(WORKER_API_BASE_URL, {params: {
+            position: 'COUNSELOR'
+        }});
+        return res.data.data.workers;
+    }
+
 
     static getWorkerById(id) {
         return axios.get(WORKER_API_BASE_URL + "get/" + id);
-    }
-
-    static updateWorker(id, worker) {
-        return axios.put(WORKER_API_BASE_URL + id, worker);
-    }
-
-    static deleteWorker(id) {
-        return axios.delete(WORKER_API_BASE_URL + id);
     }
 
 }

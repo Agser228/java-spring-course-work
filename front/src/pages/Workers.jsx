@@ -10,6 +10,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { flexbox } from '@mui/system';
 import EntityTableComponent from '../components/EntityTableComponent';
 import DialogFormComponent from './../components/DialogFormComponent';
+import AuthService from './../services/AuthService';
 
 
 const Workers = () => {
@@ -75,6 +76,10 @@ const Workers = () => {
             let createdWorker = res;
             setWorkers([...workers, createdWorker]);
         })
+
+        AuthService.registerWorker(worker.email, worker.phoneNumber).then((res) => {
+            console.log(res);
+        });
     }
 
     return (

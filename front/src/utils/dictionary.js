@@ -28,7 +28,8 @@ export const dictionary = {
     number: "Номер",
     currentYear: "Год",
     amountPlaces: "Количество мест",
-    status: "Статус"
+    status: "Статус",
+    email: "Почта"
 }
 
 export const ignore = [

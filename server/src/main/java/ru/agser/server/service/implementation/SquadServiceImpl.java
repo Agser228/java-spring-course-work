@@ -46,10 +46,8 @@ public class SquadServiceImpl extends AbstractServiceImpl<Squad, SquadRepository
 
         // Sort chidlren
         List<Child> sortedChildren = childService.getAllChildrenSortedBy(new AgeChildComparator());
-        System.out.println("Количество детей: " + sortedChildren.size());
         // Split children
         List<List<Child>> splittedChildren = splitChildrenOnSquadsEvenly(sortedChildren, amountSquads);
-        System.out.println("Количество отрядов: " + splittedChildren.size());
 
         // Squads filled by children
         fillSquadsByChildren(splittedChildren, shift);
@@ -131,7 +129,6 @@ public class SquadServiceImpl extends AbstractServiceImpl<Squad, SquadRepository
             for (List<Child> children : splittedChildren) {
                 children.add(stackSortedChildren.pop());
                 if (stackSortedChildren.isEmpty()) break;
-                System.out.println("size : " + stackSortedChildren.size());
             }
         }
 

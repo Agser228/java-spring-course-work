@@ -44,6 +44,7 @@ public class Worker {
 
     private String placeIssuePassport;
     private String seriesNumberPassport;
+    private String email;
 
     private Position position;
     private String phoneNumber;

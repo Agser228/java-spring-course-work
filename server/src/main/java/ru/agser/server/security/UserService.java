@@ -26,19 +26,21 @@ public class UserService implements UserDetailsService {
         return null;
     }
 
-    public User signUp(SignUpRequest signUpRequest) {
-
-        User user = User.builder()
-                .email(signUpRequest.getUsername())
-                .password(passwordEncoder.encode(signUpRequest.getPassword()))
-                .build();
-
-        return userRepository.save(user);
+    public User signUpWorker(String email, String password) {
+        User user = userRepository.findUserByEmail(email);
+        if (user == null) {
+            return userRepository.save(
+                    User.builder()
+                    .email(email)
+                    .password(passwordEncoder.encode(password))
+                    .role(UserRole.WORKER)
+                    .build());
+        } else {
+            return null;
+        }
     }
 
-    public User signIn(SignInRequest signInRequest) {
-        String email = signInRequest.getEmail();
-        String password = signInRequest.getPassword();
+    public User signIn(String email, String password) {
 
         User user = userRepository.findUserByEmail(email);
 

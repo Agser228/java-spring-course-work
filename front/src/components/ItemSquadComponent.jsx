@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Grid, Card, CardContent, Typography, CardActions, Button} from "@mui/material";
 import DialogFormComponent from './DialogFormComponent';
+import SquadFormComponent from './SquadFormComponent';
 
 
 const ItemSquadComponent = ({squad}) => {
@@ -22,7 +23,7 @@ const ItemSquadComponent = ({squad}) => {
         <Card
         sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
       >
-
+{/* 
         <DialogFormComponent
         entity={squad}
         onClose={handleCloseEdit}
@@ -30,6 +31,12 @@ const ItemSquadComponent = ({squad}) => {
         open={openEdit}
         callback={() => {}}
         purpose="update"
+        /> */}
+
+        <SquadFormComponent
+        open={openEdit}
+        onClose={handleCloseEdit}
+        squad={squad}
         />
 
           

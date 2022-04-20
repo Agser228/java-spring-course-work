@@ -17,13 +17,13 @@ const Login = () => {
         AuthService.login(email, password).then((res) =>
             {
                 console.log(res);
-                localStorage.setItem("auth", res["success"].toString);
+                localStorage.setItem("auth", res.success);
                 if (res.success) {
                     setIsAuth(true);
-                    let role = res.user.role;
-                    console.log(role);
-                    setAccess(role);
-                    localStorage.setItem("access", role);
+                    setAccess(res.user.role);
+                    console.log(res.user.role);
+                    localStorage.setItem("access", res.user.role);
+                    localStorage.setItem("user_id", res.user.id);
                 }
             }
         );                                

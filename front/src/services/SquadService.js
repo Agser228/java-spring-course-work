@@ -12,4 +12,16 @@ export default class SquadService {
         let res = await axios.post(SQUAD_API_BASE_URL + "create-all", payload);
         return res.data.data.squads;
     }
+
+    static async attachCounselorToSquad(squadId, counselorId) {
+        let res = await axios.post(`${SQUAD_API_BASE_URL}${squadId}/attach/${counselorId}`)
+        return res.data.data.squad;
+    }
+
+    static async disattachCounselorToSquad(squadId) {
+        let res = await axios.post(`${SQUAD_API_BASE_URL}${squadId}/disattach`)
+        return res.data.data.squad;
+    }
+
+
 }
