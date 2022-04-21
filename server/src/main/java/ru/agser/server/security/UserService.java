@@ -56,4 +56,9 @@ public class UserService implements UserDetailsService {
             return null;
         }
     }
+
+    public Boolean deleteById(Long id) {
+        userRepository.deleteById(id);
+        return true;
+    }
 }

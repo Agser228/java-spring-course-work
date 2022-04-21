@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
+import ru.agser.server.security.User;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -48,6 +49,8 @@ public class Parent {
     )
     @JsonBackReference
     private Child child;
+
+    private Long userId;
 
     private String name;
     private String surname;

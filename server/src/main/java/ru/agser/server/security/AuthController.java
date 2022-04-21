@@ -27,27 +27,6 @@ public class AuthController {
         this.userService = userService;
     }
 
-    @PostMapping("/signup-worker")
-    public ResponseEntity<Response> registerUser(@RequestBody SignUpRequest signUpRequest) {
-        System.out.println(signUpRequest);
-
-
-        User user = userService.signUpWorker(signUpRequest.getEmail(), signUpRequest.getPassword());
-        Map<?, ?> data;
-        if (user != null) {
-            data = Map.of("user", user, "success", true);
-        } else {
-            data = Map.of("user", "User already exists", "success", false);
-        }
-        return ResponseEntity.ok(
-                Response.builder()
-                        .timeStamp(LocalDateTime.now())
-                        .message("worker signed up")
-                        .status(HttpStatus.OK)
-                        .statusCode(HttpStatus.OK.value())
-                        .data(data)
-                        .build());
-    }
 
     @PostMapping("/signin")
     public ResponseEntity<Response> authenticateUser(@RequestBody SignInRequest signInRequest) {

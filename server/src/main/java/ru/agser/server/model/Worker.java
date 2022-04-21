@@ -42,6 +42,8 @@ public class Worker {
     private String surname;
     private String patronymic;
 
+    private Long userId;
+
     private String placeIssuePassport;
     private String seriesNumberPassport;
     private String email;

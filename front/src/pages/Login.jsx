@@ -23,7 +23,7 @@ const Login = () => {
                     setAccess(res.user.role);
                     console.log(res.user.role);
                     localStorage.setItem("access", res.user.role);
-                    localStorage.setItem("user_id", res.user.id);
+                    localStorage.setItem("userId", res.user.id);
                 }
             }
         );                                

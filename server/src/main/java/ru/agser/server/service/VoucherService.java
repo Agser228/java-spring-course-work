@@ -11,4 +11,6 @@ public interface VoucherService extends AbstractService<Voucher> {
     Voucher rejectVoucher(Long voucherId);
 
     List<Voucher> getVouchersByStatus(String status);
+
+    Voucher getVoucherByUserId(Long userId);
 }

@@ -33,5 +33,5 @@ export const dictionary = {
 }
 
 export const ignore = [
-    "child", "parent", "childId", "parentId", "id", "squad", "squads", "message", "timeStamp"
+    "child", "parent", "childId", "parentId", "id", "squad", "squads", "message", "timeStamp", "userId"
 ]

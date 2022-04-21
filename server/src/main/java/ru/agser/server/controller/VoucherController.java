@@ -79,4 +79,26 @@ public class VoucherController extends AbstractController<Voucher, VoucherServic
                         .build()
         );
     }
+
+    @GetMapping("/exist")
+    public ResponseEntity<Response> getVoucherByUserId(@RequestParam(name="userId") Long userId){
+        Voucher voucher = service.getVoucherByUserId(userId);
+
+        Map<?, ?> data;
+        if (voucher == null) {
+            data = Map.of("voucher", "");
+        } else {
+            data = Map.of("voucher", voucher);
+        }
+
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timeStamp(LocalDateTime.now())
+                        .message(String.format("%s rejected", type))
+                        .status(HttpStatus.OK)
+                        .statusCode(HttpStatus.OK.value())
+                        .data(data)
+                        .build()
+        );
+    }
 }

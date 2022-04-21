@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface VoucherRepository extends AbstractRepository<Voucher> {
     List<Voucher> findAllByStatus(VoucherStatus status);
+    Voucher findVoucherByUserId(Long userId);
 }

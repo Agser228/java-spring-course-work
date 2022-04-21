@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { dictionary, ignore } from '../utils/dictionary';
 import { Box, Card, CardContent, CardActions, Button, DialogContent, DialogActions, Dialog, DialogTitle, Typography, Grid } from '@mui/material';
+import VoucherService from './../services/VoucherService';
 
 const VoucherItemComponent = ({application}) => {
     const [open, setOpen] = useState(false);
@@ -20,11 +21,17 @@ const VoucherItemComponent = ({application}) => {
         handleOpen();
     }
     const rejectVoucher = (id) => {
-        handleClose()
+        handleClose();
+        VoucherService.rejectVoucher(id).then((res) =>{
+            console.log("rejected voucher", res)
+        })
         console.log("reject voucher", id);
     }
     const acceptVoucher = (id) => {
-        handleClose()
+        handleClose();
+        VoucherService.acceptVoucher(id).then((res) =>{
+            console.log("accepted voucher", res)
+        })
         console.log("accept voucher", id);
     }
 

@@ -38,12 +38,8 @@ public class Voucher {
     )
     private Long id;
 
-    @OneToOne
-    @JoinColumn(
-            name = "user_id",
-            referencedColumnName = "id"
-    )
-    private User user;
+    private Long userId;
+
     private LocalDateTime timeStamp;
     private VoucherStatus status;
     private String message;

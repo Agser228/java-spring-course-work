@@ -19,6 +19,7 @@ function App() {
   const [isAuth, setIsAuth] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [access, setAccess] = useState("all");
+  const [userId, setUserId] = useState(null);
   useEffect( () => {
     if (localStorage.getItem("auth")) {
       setIsAuth(true);
@@ -28,6 +29,13 @@ function App() {
     
     if (localStorage.getItem("access")) {
       setAccess(localStorage.getItem("access"));
+    } else {
+      localStorage.setItem("access", "all");
+      setAccess("all");
+    }
+
+    if (localStorage.getItem("userId")) {
+      setUserId(localStorage.getItem("userId"));
     }
     setIsLoading(false);
   }, [])
@@ -40,7 +48,9 @@ function App() {
         setAccess,
         isAuth,
         setIsAuth,
-        isLoading
+        isLoading,
+        userId,
+        setUserId
       }}>
             <BrowserRouter>
               <Navbar/>

@@ -10,10 +10,12 @@ const Applications = () => {
     const [applications, setApplications] = useState([]);
 
     useEffect(() => {
-        VoucherService.getAllVouchers().then((vouchers) => {
+
+        VoucherService.getAllVouchersByStatus("CONSIDERED").then((vouchers) => {
             setApplications(vouchers);
             console.log(vouchers);
         })
+
     }, []);
 
 

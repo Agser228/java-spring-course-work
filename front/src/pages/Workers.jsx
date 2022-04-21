@@ -77,9 +77,9 @@ const Workers = () => {
             setWorkers([...workers, createdWorker]);
         })
 
-        AuthService.registerWorker(worker.email, worker.phoneNumber).then((res) => {
-            console.log(res);
-        });
+        // AuthService.registerWorker(worker.email, worker.phoneNumber).then((res) => {
+        //     console.log(res);
+        // });
     }
 
     return (

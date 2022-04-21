@@ -78,4 +78,9 @@ public class VoucherServiceImpl extends AbstractServiceImpl<Voucher, VoucherRepo
         VoucherStatus status = VoucherStatus.valueOf(statusName);
         return repository.findAllByStatus(status);
     }
+
+    @Override
+    public Voucher getVoucherByUserId(Long userId) {
+        return repository.findVoucherByUserId(userId);
+    }
 }
