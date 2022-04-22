@@ -5,20 +5,46 @@ import { dictionary, ignore } from '../utils/dictionary';
 import "../App.css"
 import { Box, TextField } from '@mui/material';
 
-const FormComponent = ({entity, entityName, formName, setter, cleaner}) => {
+const FormComponent = ({
+    entity, 
+    entityName, 
+    formName, 
+    setter,
+    errorHandler,
+    cleaner}) => {
 
     const[schema, setSchema] = useState([])
     const[form, setForm] = useState({})
+    const [isError, setIsError] = useState(false)
+    const [errorMessage, setErrorMessage] = useState({});
     useEffect(() => {
         SchemaService.getSchema(entityName).then((schema) => {
             let filterSchema = schema.filter((field) => !ignore.includes(field))
             setSchema(filterSchema);
         });
+        errorHandler((msg) => handleError)
         cleaner(() => clearForm);
-        console.log("after filter:", schema.filter((field) => !ignore.includes(field)));
 
     }, []);
 
+    const disableError = () => {
+        setIsError(false);
+        setErrorMessage({});
+    }
+
+    const handleError = (msg) => {
+        console.log(msg);
+        setIsError(true);
+        setErrorMessage(msg);
+    }
+
+    const getHelperText = (field) => {
+        if (errorMessage[field]) {
+            return errorMessage[field];
+        } else {
+            return "";
+        }
+    }
 
     useEffect(() => {
         setter(form);
@@ -48,6 +74,9 @@ const FormComponent = ({entity, entityName, formName, setter, cleaner}) => {
                     <TextField
                         margin='normal'
                         required
+                        onFocus={disableError}
+                        error={isError}
+                        helperText={errorMessage[field]}
                         id={field+Date.now()}
                         label={dictionary[field]}
                         name={field}

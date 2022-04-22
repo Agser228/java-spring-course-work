@@ -1,5 +1,5 @@
+import { Box, Modal, Typography } from '@mui/material';
 import React from 'react';
-import { Typography, Box, Modal, Card, CardContent, CardActions, Button, DialogContent, DialogActions, Dialog, DialogTitle, Grid } from '@mui/material';
 import { dictionary, ignore } from '../utils/dictionary';
 
 

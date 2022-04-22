@@ -1,4 +1,4 @@
-import { Container, Paper, Box, Button, Typography } from '@mui/material';
+import { Container, Paper, Box, Button, Typography, Alert, AlertTitle } from '@mui/material';
 import React, {useState, useEffect, useContext} from 'react';
 import ShiftService from '../services/ShiftService';
 import FormComponent from '../components/FormComponent';
@@ -16,6 +16,8 @@ const Voucher = () => {
     const {userId} = useContext(AuthContext);
     const [isVoucherSent, setIsVoucherSent] = useState(false);
     const [voucherMessage, setVoucherMessage] = useState("");
+    const [childErrorHandler, setChildErrorHandler] = useState((msg) => () => {});
+    const [parentErrorHandler, setParentErrorHandler] = useState((msg) => () => {});
 
     useEffect(() => {
         ShiftService.getAllOpenedShifts().then(shifts => {
@@ -44,6 +46,25 @@ const Voucher = () => {
         });
     }
 
+    const splitError = (error) => {
+        let errorParent = {}
+        let errorChild = {}
+
+        Object.keys(error).forEach((key) => {
+            if (key.includes("child")) {
+                let childKey = key.charAt(5).toLowerCase() + key.substring(6)
+                errorChild[childKey] = error[key];
+            } else if (key.includes("parent")) {
+                let parentKey = key.charAt(6).toLowerCase() + key.substring(7)
+                errorParent[parentKey] = error[key];
+            }
+        });
+
+        console.log(errorParent, errorChild);
+        
+        return {errorParent, errorChild}
+    }
+
     const submit = (e) => {
         e.preventDefault()
         console.log("submit");
@@ -59,17 +80,31 @@ const Voucher = () => {
 
         setParent({});
         setChild({});
-        VoucherService.createVoucher(voucher).then((res) => {
-            console.log(res);
+        VoucherService.createVoucher(voucher).then((response) => {
+            let result = response.data;
+            console.log(result);
+            if (result.statusCode == 400) {
+                console.log(parentErrorHandler);
+                let {errorParent, errorChild} = splitError(result.data);
+                parentErrorHandler(errorParent);
+                childErrorHandler(errorChild);
+            } else {    
+                 setIsVoucherSent(true);
+                 setVoucherMessage("Заявка отправлена")
+             }
         });
-        setIsVoucherSent(true);
+
     }
 
     return (
-        <Container component={Paper} maxWidth="lg"
-            sx={{
-                mt: 5
-            }}
+        <Container
+        maxWidth="lg"
+        component={Paper}
+        sx={{
+            mt: 2,
+            p: 6,
+            mb: 2
+        }}
         >
         { isShiftOpen 
         ? <div>
@@ -81,8 +116,21 @@ const Voucher = () => {
                     }}
                 >
                 <Box sx={{display: "flex", justifyContent: "space-around"}}>
-                    <FormComponent entity={{}} entityName={"parent"} formName={"Данные родителя"} setter={setParent} cleaner={setCleanParentForm}/>
-                <FormComponent entity={{}} entityName={"child"} formName={"Данные ребенка"} setter={setChild} cleaner={setCleanChildForm}/>
+                    <FormComponent 
+                    entity={{}} 
+                    entityName={"parent"} 
+                    formName={"Данные родителя"} 
+                    setter={setParent}
+                    errorHandler={setParentErrorHandler}
+                    cleaner={setCleanParentForm}/>
+                <FormComponent 
+                entity={{}} 
+                entityName={"child"} 
+                formName={"Данные ребенка"} 
+                setter={setChild} 
+                cleaner={setCleanChildForm}
+                errorHandler={setChildErrorHandler}
+                />
                 </Box>
 
                 <Button
@@ -90,10 +138,17 @@ const Voucher = () => {
                 variant="contained"
                 type="submit" onClick={submit}>Отправить</Button>
                 </Box>
-            : <Typography>{voucherMessage}</Typography>
+            :   <Alert severity="info">
+                <AlertTitle>Статус заявки</AlertTitle>
+                {voucherMessage}
+                </Alert>
             }
         </div>
-        : <Typography>На данный момент нет открытых смен</Typography>
+        : 
+            <Alert severity="info">
+            <AlertTitle>Смена еще не началась</AlertTitle>
+            На данный момент нет открытых смен — <strong>проверьте попозже</strong>
+            </Alert>
         }
         </Container>
     );

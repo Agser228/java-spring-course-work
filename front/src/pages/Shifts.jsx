@@ -1,15 +1,18 @@
-import { Button, Container, Paper } from '@mui/material';
-import EntityTableComponent from './../components/EntityTableComponent';
-import React from 'react';
-import { useState, useEffect } from 'react';
-import ShiftService from './../services/ShiftService';
-import CreateFormComponent from './../components/CreateFormComponent';
+import { Button, CircularProgress, Container, Paper } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 import DialogFormComponent from './../components/DialogFormComponent';
+import EntityTableComponent from './../components/EntityTableComponent';
+import ShiftService from './../services/ShiftService';
+import { useFetching } from './../hooks/useFetching';
 
 const Shifts = () => {
 
     const [shifts, setShifts] = useState([]);
     const [open, setOpen] = useState(false);
+    const [fetchShifts, isShiftsLoading, shiftsError] = useFetching( async () => {
+        const loadedShifts = await ShiftService.getAllShifts();
+        setShifts(loadedShifts);
+    });
 
     const handleOpen = () => {
         setOpen(true);
@@ -19,23 +22,21 @@ const Shifts = () => {
         setOpen(false);
       };
     
-    useEffect( () => {
-        ShiftService.getAllShifts().then((shifts) => {
-            setShifts(shifts);
-        })
-    }, [])
+    useEffect(() => {
+        fetchShifts();
+    }, []);
 
     const updateShift = (id, updatedShift) => {
         ShiftService.update(id, updatedShift).then((res) => {
             console.log(res);
         })
-        setShifts([...shifts.filter(shift => shift.id != id), updatedShift]);
+        setShifts([...shifts.filter(shift => shift.id !== id), updatedShift]);
     }
     const deleteShift = (id) => {
         ShiftService.delete(id).then((res) => {
             console.log(res);
         })
-        setShifts([...shifts.filter(shift => shift.id != id)]);
+        setShifts([...shifts.filter(shift => shift.id !== id)]);
     }
 
     const createShift = (shift) => {
@@ -48,6 +49,9 @@ const Shifts = () => {
 
 
     return (
+        isShiftsLoading 
+        ? <CircularProgress/>
+        : 
         <Container
         maxWidth="md"
         component={Paper}
@@ -57,7 +61,8 @@ const Shifts = () => {
             mb: 2
         }}
         >
-            <Button onClick={handleOpen}>
+            
+             <Button onClick={handleOpen}>
                 Создать новую смену
             </Button>
 
@@ -78,8 +83,10 @@ const Shifts = () => {
         update={updateShift}
         del={deleteShift}
         />
+            
 
-        </Container>    
+        </Container>  
+    
     );
 };
 

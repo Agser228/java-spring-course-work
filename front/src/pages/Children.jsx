@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import ChildService from '../services/ChildService';
+import { CircularProgress, Container, Paper } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Container, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import EntityTableComponent from '../components/EntityTableComponent';
+import ChildService from '../services/ChildService';
 
 const Children = ({editable}) => {
     
     const [children, setChildren] = useState([]);
-
+    const [isLoading, setIsLoading] = useState(false);
     const router = useNavigate();
     const refresh = () => {
         ChildService.getAllChildren().then((res) => {
@@ -16,7 +16,11 @@ const Children = ({editable}) => {
             });
         }
     
-    useEffect(() => {refresh(); }, []);
+    useEffect(() => {
+        setIsLoading(true);
+        refresh();
+        setIsLoading(false);
+    }, []);
 
     const editChild = (id) => {
         router(`/add/${id}`);
@@ -42,6 +46,9 @@ const Children = ({editable}) => {
     
     console.log("children", children);
     return (
+        isLoading
+        ? <CircularProgress/>
+        :
         <Container
         maxWidth="md"
         component={Paper}

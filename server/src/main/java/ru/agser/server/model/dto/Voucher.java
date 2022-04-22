@@ -16,6 +16,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -45,25 +50,46 @@ public class Voucher {
     private String message;
 
     // parent
+    @NotBlank(message = "Поле не должно быть пустым")
     private String parentName;
+    @NotBlank(message = "Поле не должно быть пустым")
     private String parentSurname;
+    @NotBlank(message = "Поле не должно быть пустым")
     private String parentPatronymic;
 
+    @NotBlank(message = "Поле не должно быть пустым")
     private String parentPlaceIssuePassport;
+    @NotBlank(message = "Поле не должно быть пустым")
     private String parentSeriesNumberPassport;
+    @NotBlank(message = "Поле не должно быть пустым")
     private String parentPhoneNumber;
+    @NotBlank(message = "Поле не должно быть пустым")
     private String parentAddress;
 
 
     // child
+    @NotBlank(message = "Поле не должно быть пустым")
     private String childName;
+
+    @NotBlank(message = "Поле не должно быть пустым")
     private String childSurname;
+
+    @NotBlank(message = "Поле не должно быть пустым")
     private String childPatronymic;
 
     @JsonFormat(pattern = "MM/dd/yyyy")
     private LocalDate childDateBirth;
+
+    @NotNull(message = "Поле не должно быть пустым")
+    @Max(2147483647)
     private int childBirthCertificateNumber;
+
+    @NotBlank(message = "Поле не должно быть пустым")
     private String childAddress;
+
+    @NotNull(message = "Поле не должно быть пустым")
+    @Max(15)
+    @Min(6)
     private int childAge;
 
     public void setStatus(VoucherStatus status) {

@@ -1,11 +1,10 @@
-import { AuthContext } from '../context';
 import React, { useContext } from 'react';
 import { Navigate, Route, Routes } from "react-router-dom";
-import { routes } from '../router';
+import { AuthContext } from '../context';
 import Login from '../pages/Login';
-import Squads from './../pages/Squads';
-import Children from './../pages/Children';
+import { routes } from '../router';
 import Home from './../pages/Home';
+import SignUp from './../pages/SignUp';
 const AppRouter = () => {
 
      const {isAuth, isLoading, access} = useContext(AuthContext);
@@ -38,6 +37,7 @@ const AppRouter = () => {
     </Routes> 
     : <Routes>
         <Route path="/" element={<Home/>}/>
+        <Route path="/signup" element={<SignUp/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="*" element={<Navigate replace to="/login"/>}/>
     </Routes>

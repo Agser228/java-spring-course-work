@@ -5,8 +5,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import ru.agser.server.security.payload.SignInRequest;
-import ru.agser.server.security.payload.SignUpRequest;
+import ru.agser.server.exception.IllegalEmailStateException;
+import ru.agser.server.exception.IncorrectPasswordException;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -27,38 +27,46 @@ public class UserService implements UserDetailsService {
     }
 
     public User signUpWorker(String email, String password) {
-        User user = userRepository.findUserByEmail(email);
-        if (user == null) {
-            return userRepository.save(
-                    User.builder()
-                    .email(email)
-                    .password(passwordEncoder.encode(password))
-                    .role(UserRole.WORKER)
-                    .build());
-        } else {
-            return null;
-        }
+        userRepository.findUserByEmail(email).ifPresent(
+                (u) -> {throw new IllegalEmailStateException("Данный email занят");}
+        );
+
+        return userRepository.save(
+                User.builder()
+                .email(email)
+                .password(passwordEncoder.encode(password))
+                .role(UserRole.WORKER)
+                .build());
+
     }
 
     public User signIn(String email, String password) {
 
-        User user = userRepository.findUserByEmail(email);
+        User user = userRepository.findUserByEmail(email).orElseThrow(
+                () -> new IllegalEmailStateException("Пользователь с таким email не найден")
+        );
 
-        System.out.println(String.format("Пользователь %s по email: %s", user, email));
-
-        System.out.println(passwordEncoder.matches("1234", passwordEncoder.encode("1234")));
-
-        if (passwordEncoder.matches(password, user.getPassword())) {
-            System.out.println("Пароль совпал");
-            return user;
-        } else {
-            System.out.println("Пароль не совпал");
-            return null;
+        if (!passwordEncoder.matches(password, user.getPassword())) {
+            throw new IncorrectPasswordException("Введен неверный пароль");
         }
+
+        return user;
     }
 
     public Boolean deleteById(Long id) {
         userRepository.deleteById(id);
         return true;
+    }
+
+    public User signUp(String email, String password) {
+        userRepository.findUserByEmail(email).ifPresent(
+                (u) -> {throw new IllegalEmailStateException("Данный email занят");}
+        );
+
+        return userRepository.save(new User.UserBuilder()
+                .email(email)
+                .password(passwordEncoder.encode(password))
+                .role(UserRole.PARENT)
+                .build());
     }
 }

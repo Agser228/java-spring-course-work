@@ -6,7 +6,7 @@ export default class ShiftService {
 
     static async getAllShifts() {
         let res = await axios.get(SHIFT_API_BASE_URL + "list");
-        return res.data.data.shift
+        return  res.data.data.shift;
     }
 
     static async createShift(shift) {

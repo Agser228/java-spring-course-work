@@ -1,14 +1,5 @@
-import ExpandLess from "@mui/icons-material/ExpandLess";
-import ExpandMore from "@mui/icons-material/ExpandMore";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import StarBorder from "@mui/icons-material/StarBorder";
-import { Grid, Card, CardContent, Typography, CardActions, Button} from "@mui/material";
-import Collapse from "@mui/material/Collapse";
-import List from "@mui/material/List";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import React, {useState } from "react";
+import { Grid } from "@mui/material";
+import React, { useState } from "react";
 import ItemSquadComponent from './../ItemSquadComponent';
 
 export default function NestedListComponent({squads}) {

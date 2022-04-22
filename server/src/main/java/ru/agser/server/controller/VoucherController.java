@@ -15,6 +15,7 @@ import ru.agser.server.model.dto.Response;
 import ru.agser.server.model.dto.Voucher;
 import ru.agser.server.service.VoucherService;
 
+import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.Map;
 
@@ -42,7 +43,7 @@ public class VoucherController extends AbstractController<Voucher, VoucherServic
     }
 
     @PostMapping("")
-    public ResponseEntity<Response> createVoucher(@RequestBody Voucher voucher) {
+    public ResponseEntity<Response> createVoucher(@Valid @RequestBody Voucher voucher) {
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(LocalDateTime.now())

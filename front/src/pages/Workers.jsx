@@ -1,16 +1,8 @@
-import React, { useState, useEffect} from 'react';
-import { Avatar, Box, MenuItem, Dialog, DialogContent, DialogActions, TextField, InputLabel, Select, Button, Container, Paper, Stack, IconButton } from '@mui/material';
-import { DataGrid } from '@mui/x-data-grid';
-import EditRoundedIcon from '@mui/icons-material/EditRounded';
-import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
-import InfoRoundedIcon from '@mui/icons-material/InfoRounded';
-import WorkerService from '../services/WorkerService';
-import FormComponent from '../components/FormComponent';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { flexbox } from '@mui/system';
+import { Button, Container, Paper } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 import EntityTableComponent from '../components/EntityTableComponent';
+import WorkerService from '../services/WorkerService';
 import DialogFormComponent from './../components/DialogFormComponent';
-import AuthService from './../services/AuthService';
 
 
 const Workers = () => {

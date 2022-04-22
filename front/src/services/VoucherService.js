@@ -7,6 +7,7 @@ export default class VoucherService {
     static async createVoucher(voucher) {
         let res = await axios.post(VOUCHER_API_BASE_URL, voucher);
         console.log(voucher);
+        console.log(res);
         return res;
     }
 

@@ -1,12 +1,10 @@
-import Voucher from "../pages/Voucher"
+import React from "react"
+import Applications from "../pages/Applications"
 import Children from "../pages/Children"
 import Squads from "../pages/Squads"
-import Applications from "../pages/Applications"
-import React from "react"
-import Workers from './../pages/Workers';
-import Home from "./../pages/Home"
-import Login from "./../pages/Login"
-import Shifts from './../pages/Shifts';
+import Voucher from "../pages/Voucher"
+import Shifts from './../pages/Shifts'
+import Workers from './../pages/Workers'
 
 export const adminRoutes = [
     {path: '/shifts', component: <Shifts/>, name: "Смены"},

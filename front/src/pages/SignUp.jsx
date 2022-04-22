@@ -4,7 +4,8 @@ import { Link, Avatar, Box, Button, Container, Paper, TextField, Typography } fr
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import AuthService from '../services/AuthService';
 
-const Login = () => {
+const SignUp = () => {
+
 
     const {setIsAuth, setAccess} = useContext(AuthContext);
     
@@ -13,10 +14,10 @@ const Login = () => {
     const [isError, setIsError] = useState(false);
     const [errorMessage, setErrorMessage] = useState({password: "", email: ""});
 
-    const login = (e) => {
+    const signUp = (e) => {
 
         e.preventDefault()
-        AuthService.login(email, password).then((res) =>
+        AuthService.signUp(email, password).then((res) =>
             {
                 console.log(res);
                 if (res.success) {
@@ -29,6 +30,7 @@ const Login = () => {
                 } else {
                     setErrorMessage({password: res.password, email: res.email})
                     setIsError(true)
+                    
                 }
             }
         );                                
@@ -63,28 +65,28 @@ const Login = () => {
                     variant="h5"
                     
                 >
-                    Войти
+                    Зарегистрироваться
                 </Typography>
 
                 <Box
-                component="form" onSubmit={login}
+                component="form" onSubmit={signUp}
                 >
 
                 <TextField
                 onFocus={disableError}
                 error={isError}
-                helperText={errorMessage.email}
+                helperText={errorMessage.email} 
                 margin="normal"
                 label="Почта" 
                 variant="outlined"
                 onChange={(e) => setEmail(e.target.value)}
                 fullWidth
                 />
-                <TextField 
-                fullWidth
+                <TextField
                 onFocus={disableError}
                 error={isError}
-                helperText={errorMessage.password}
+                helperText={errorMessage.password} 
+                fullWidth
                 margin="normal"
                 label="Пароль" 
                 variant="outlined"
@@ -98,7 +100,7 @@ const Login = () => {
                 fullWidth
 
                 >
-                    Войти
+                    Зарегистрироваться
                 </Button>
                 <Box
                 sx={{mt:2}}
@@ -107,17 +109,16 @@ const Login = () => {
                 >
 
                 <Link
-                href="/signup"
+                href="login"
                 variant="body2"
-                >Нет аккаунта? Зарегистрируйся</Link>
+                >Есть аккаунт? Войти</Link>
                 </Box>
 
                 </Box>
             
             </Box>
         </Container>
-
     );
 };
 
-export default Login;
+export default SignUp;

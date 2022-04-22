@@ -1,11 +1,10 @@
 
-import { AppBar, Box, Button, CssBaseline, IconButton, Toolbar, Typography, MenuItem } from '@mui/material';
-import React, { useContext } from 'react';
-import { AuthContext } from './../../../context/index';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { routes } from './../../../router/index';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import AuthService from './../../../services/AuthService';
+import { AppBar, Box, Button, CssBaseline, IconButton, Toolbar } from '@mui/material';
+import React, { useContext } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { AuthContext } from './../../../context/index';
+import { routes } from './../../../router/index';
 
 const Navbar = () => {
     const location = useLocation();
@@ -14,10 +13,12 @@ const Navbar = () => {
   
 
 
-    const isLoginPage = location.pathname === "/login";
+    const isLoginOrSignUpPage = location.pathname === "/login" || location.pathname === "/signup";
     const logout = () => {
       setAccess("all");
       setIsAuth(false);
+      localStorage.removeItem("access");
+      localStorage.removeItem("auth");
     }
 
     const login = () => {
@@ -25,7 +26,7 @@ const Navbar = () => {
     }
 
     return (
-        !isLoginPage
+        !isLoginOrSignUpPage
         ? <Box sx={{ flexGrow: 1 }}>
             <CssBaseline />
         <AppBar position="static">

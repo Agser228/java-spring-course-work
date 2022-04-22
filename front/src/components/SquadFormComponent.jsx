@@ -1,11 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Paper, FormControl, InputLabel, Select, MenuItem, Container, Box, Card, CardContent, CardActions, Button, DialogContent, DialogActions, Dialog, DialogTitle, Typography, Grid } from '@mui/material';
-import UpdateFormComponent from './UpdateFormComponent';
-import CreateFormComponent from './CreateFormComponent';
-import EntityTableComponent from './EntityTableComponent';
-import { dictionary } from '../utils/dictionary';
-import WorkerService from './../services/WorkerService';
+import { Box, Button, Dialog, DialogContent, FormControl, InputLabel, MenuItem, Select, Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 import SquadService from './../services/SquadService';
+import WorkerService from './../services/WorkerService';
+import EntityTableComponent from './EntityTableComponent';
 
 const SquadFormComponent = ({open, onClose, squad}) => {
 
