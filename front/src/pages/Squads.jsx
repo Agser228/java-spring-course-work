@@ -31,7 +31,9 @@ const Squads = () => {
 
             ShiftService.getAllShifts().then((shifts) => {
                 setShifts(shifts);
+                if (shift.lenght != 0){
                 setShiftId(shifts[0].id)
+                }
             })
     }, []);
 
