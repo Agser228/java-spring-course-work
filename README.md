@@ -1,4 +1,4 @@
-Java Spring Course Work 4th Semester MIREA
+Java Spring Course Work 5th Semester MIREA
 
 Сервис позволяет организовывать работу детского лагеря:
 - создавать отряды
