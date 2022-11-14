@@ -21,8 +21,9 @@ export default class ChildService {
         return axios.put(CHILD_API_BASE_URL + id, child);
     }
 
-    static deleteChild(id) {
-        return axios.delete(CHILD_API_BASE_URL + id);
+    static async deleteChild(id) {
+        let res =  await axios.delete(CHILD_API_BASE_URL +"delete/"+ id);
+        return res.data.data.deleted;
     }
 
 }

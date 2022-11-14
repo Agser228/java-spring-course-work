@@ -36,8 +36,9 @@ const Children = ({editable}) => {
 
     const deleteChild = (id) => {
         ChildService.deleteChild(id).then((res) => {
-            setChildren([children.filter(child => child.id !== id)])
-        }); 
+            console.log(res);
+        });
+        setChildren([...children.filter(child => child.id !== id)])
     }
 
     const updateChild = () => {

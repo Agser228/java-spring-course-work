@@ -1,9 +1,9 @@
 
 spring:
   datasource:
-    password: 11
+    password: postgres
     url: "jdbc:postgresql://localhost:5432/camp"
-    username: root
+    username: postgres
   jpa:
     hibernate:
       ddl-auto: create
