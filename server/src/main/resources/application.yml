@@ -1,8 +1,10 @@
 
 spring:
   datasource:
-    password: postgres
+    #password: 11
     url: "jdbc:postgresql://localhost:5432/camp"
+    #username: root
+    password: postgres
     username: postgres
   jpa:
     hibernate:
