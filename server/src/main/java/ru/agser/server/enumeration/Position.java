@@ -35,6 +35,7 @@ public enum Position {
     public String toString() {
         return name;
     }
+
     public static Position fromPositionName(String positionName) {
         return positions.get(positionName);
     }
