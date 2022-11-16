@@ -41,8 +41,12 @@ const Children = ({editable}) => {
         setChildren([...children.filter(child => child.id !== id)])
     }
 
-    const updateChild = () => {
+    const updateChild = (id, updatedWorker) => {
         //TODO
+        ChildService.updateChild(id, updatedWorker).then((res) => {
+            console.log(res);
+        })
+        setChildren([...children.filter(child => child.id !== id), updatedWorker])
     }
     
     console.log("children", children);

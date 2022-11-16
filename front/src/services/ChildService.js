@@ -17,8 +17,9 @@ export default class ChildService {
         return axios.get(CHILD_API_BASE_URL + "get/" + id);
     }
 
-    static updateChild(id, child) {
-        return axios.put(CHILD_API_BASE_URL + id, child);
+    static async updateChild(id, child) {
+        let res = await axios.put(CHILD_API_BASE_URL + "update/"+ id, child);
+        return res.data.data.updated;
     }
 
     static async deleteChild(id) {
